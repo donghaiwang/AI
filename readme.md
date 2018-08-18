@@ -65,10 +65,6 @@ doc generate
 
 欢迎贡献代码。
 
-## 版本控制
-
-使用git进行项目的管理，详细信息请参考 [git](http://www.runoob.com/git/git-basic-operations.html). 
-
 ## 作者
 
 * **DonghaiWang** - *项目初始化工作* - [Github主页](https://github.com/donghaiwang)
