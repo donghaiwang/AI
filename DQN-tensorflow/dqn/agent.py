@@ -29,7 +29,7 @@ class Agent(BaseModel):
 
     self.build_dqn()
 
-  def train(self):
+  def train(self):    # 进行智能体的训练
     start_step = self.step_op.eval()
     start_time = time.time()
 
@@ -362,6 +362,7 @@ class Agent(BaseModel):
     for summary_str in summary_str_lists:
       self.writer.add_summary(summary_str, self.step)
 
+  # 不进行训练（仅仅演示）
   def play(self, n_step=10000, n_episode=100, test_ep=None, render=False):
     if test_ep == None:
       test_ep = self.ep_end

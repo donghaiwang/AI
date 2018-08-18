@@ -1,14 +1,15 @@
+# 智能体的配置文件
 class AgentConfig(object):
   scale = 10000
-  display = False
+  display = False    # 是否显示游戏画面
 
   max_step = 5000 * scale
   memory_size = 100 * scale
 
   batch_size = 32
   random_start = 30
-  cnn_format = 'NCHW'
-  discount = 0.99
+  cnn_format = 'NCHW'                     # GPU的输入图片格式
+  discount = 0.99                         # 折扣因子
   target_q_update_step = 1 * scale
   learning_rate = 0.00025
   learning_rate_minimum = 0.00025
@@ -45,11 +46,11 @@ class DQNConfig(AgentConfig, EnvironmentConfig):
   pass
 
 class M1(DQNConfig):
-  backend = 'tf'
+  backend = 'tf'  # 默认的模型类型（m1）使用的后端是tensorflow
   env_type = 'detail'
   action_repeat = 1
 
-def get_config(FLAGS):
+def get_config(FLAGS):  # main.py用来加载配置的方法（FLAGS用来传递所加载的选项）
   if FLAGS.model == 'm1':
     config = M1
   elif FLAGS.model == 'm2':
@@ -57,10 +58,10 @@ def get_config(FLAGS):
 
   for k, v in FLAGS.__dict__['__flags'].items():
     if k == 'gpu':
-      if v == False:
-        config.cnn_format = 'NHWC'
+      if v == False:                # 在TensorFlow中张量的默认Channel维度在末尾（在CPU代码里运行）
+        config.cnn_format = 'NHWC'  # 使用CPU的话就用输入数据格式：NHWC
       else:
-        config.cnn_format = 'NCHW'
+        config.cnn_format = 'NCHW'  # GPU对应的数据格式（和Tensorflow不一样）使用NCHW（通道靠前）
 
     if hasattr(config, k):
       setattr(config, k, v)
