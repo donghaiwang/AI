@@ -26,7 +26,7 @@ def py_cpu_nms(dets, thresh):
         yy2 = np.minimum(y2[i], y2[order[1:]])
 
         w = np.maximum(0.0, xx2 - xx1 + 1)  # 取两个向量的较小值
-        h = np.maximum(0.0, yy2 - yy1 + 1)  # 取两个向量的较大值
+        h = np.maximum(0.0, yy2 - yy1 + 1)  # 取两个向量的较大值，不大于0就取0
         inter = w * h    # 两个框的交集
         # 交/并得到iou值
         ovr = inter / (areas[i] + areas[order[1:]] - inter)
