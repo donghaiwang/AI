@@ -39,6 +39,7 @@ def py_cpu_nms(dets, thresh):
 
 
 def detectGesture():
+    """交警动作识别"""
     gestureModel = onnx.load('assets/gesture.onnx')
     gestureTF = prepare(gestureModel)  # tf_rep是一个python类，里面包含predict_net
     #
