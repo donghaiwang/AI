@@ -17,10 +17,10 @@ Python 3.6
 
 ### 安装
 
-Matlab 2018a 安装步骤
+Matlab 2018a [下载地址](https://pan.baidu.com/s/1mOLYnm_LF2Ud7qqEmVkGWQ) （包括Windows、Mac、Linux平台的安装包及破解步骤）
 
 ```
-Matlab 2018a [下载地址](https://pan.baidu.com/s/1mOLYnm_LF2Ud7qqEmVkGWQ) （包括Windows、Mac、Linux平台的安装包及破解步骤）
+Matlab 2018a
 ```
 
 Python
