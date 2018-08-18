@@ -55,7 +55,7 @@ doc generate
 
 ## 构建
 
-| Build Type      | Status |
+| 构建类型         | 状态   |
 | ---             | ---    |
 | **Linux CPU**   | [![Status](https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg)](https://github.com/donghaiwang/AI) |
 | **Linux GPU**   | [![Status](https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg)](https://github.com/donghaiwang/AI) |
