@@ -17,12 +17,10 @@ Python 3.6
 
 ### 安装
 
-步骤
-
-Matlab
+Matlab 2018a 安装步骤
 
 ```
-Matlab 2018a
+Matlab 2018a [下载地址](https://pan.baidu.com/s/1mOLYnm_LF2Ud7qqEmVkGWQ) （包括Windows、Mac、Linux平台的安装包及破解步骤）
 ```
 
 Python
@@ -72,7 +70,7 @@ doc generate
 
 ## 作者
 
-* **donghaiwang** - *项目初始化工作* - [Github主页](https://github.com/donghaiwang)
+* **donghaiwang** - *项目初始化* - [Github主页](https://github.com/donghaiwang)
 * **nongfugengxia** - *项目推进* - [Github主页](https://github.com/nongfugengxia)
 
 增加 [作者列表](https://github.com/donghaiwang) 列出贡献的作者。
