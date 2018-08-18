@@ -8,7 +8,7 @@
 
 ### 先决条件
 
-开发测试平台win10、Ubuntu14.04
+开发测试平台Windows 10、Ubuntu 14.04
 
 ```
 Matlab 2018a
@@ -68,11 +68,12 @@ doc generate
 
 ## 贡献
 
-欢迎贡献代码。
+欢迎热爱人工智能的仁人志士贡献代码，共同推动人工智能的进步。
 
 ## 作者
 
-* **DonghaiWang** - *项目初始化工作* - [Github主页](https://github.com/donghaiwang)
+* **donghaiwang** - *项目初始化工作* - [Github主页](https://github.com/donghaiwang)
+* **nongfugengxia** - *项目推进* - [Github主页](https://github.com/nongfugengxia)
 
 增加 [作者列表](https://github.com/donghaiwang) 列出贡献的作者。
 
