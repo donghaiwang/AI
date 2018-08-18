@@ -87,3 +87,5 @@ doc generate
 * Richard S. Sutton
 * etc
 
+![](https://img.shields.io/cocoapods/l/AFNetworking.svg)
+
