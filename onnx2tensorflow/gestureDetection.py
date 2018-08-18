@@ -48,8 +48,6 @@ def detectGesture():
     isPoliceModel = onnx.load('assets/isPoliceman.onnx')
     isPoliceTF = prepare(isPoliceModel)
 
-    # print(tf_rep.predict_net)
-
     imgRaw = imread('assets/test.jpg', mode='RGB')
     imgHt = 480
     imgWd = 640
