@@ -57,10 +57,10 @@ doc generate
 
 | Build Type      | Status |
 | ---             | ---    |
-| **Linux CPU**   | [![Status](https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-cc.svg)](https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-cc.html) |
-| **Linux GPU**   | [![Status](https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-gpu-py3.svg)](https://storage.googleapis.com/tensorflow-kokoro-build-badges/ubuntu-gpu-py3.html) |
-| **Windows CPU** | [![Status](https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-cpu.svg)](https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-cpu.html) |
-| **Windows GPU** | [![Status](https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-gpu.svg)](https://storage.googleapis.com/tensorflow-kokoro-build-badges/windows-gpu.html) |
+| **Linux CPU**   | [![Status](https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg)](https://github.com/donghaiwang/AI) |
+| **Linux GPU**   | [![Status](https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg)](https://github.com/donghaiwang/AI) |
+| **Windows CPU** | [![Status](https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg)](https://github.com/donghaiwang/AI) |
+| **Windows GPU** | [![Status](https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg)](https://github.com/donghaiwang/AI) |
 
 ## 构建工具
 
