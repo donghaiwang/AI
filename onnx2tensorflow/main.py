@@ -22,8 +22,6 @@ print(labels[maxPosition])
 
 
 
-
-
 # 为推断准备输入
 # import numpy as np
 # from PIL import Image
