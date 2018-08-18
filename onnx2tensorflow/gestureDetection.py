@@ -15,8 +15,7 @@ def py_cpu_nms(dets, thresh):
     areas = (x2 - x1 + 1) * (y2 - y1 + 1)
     # 打分从大到小排列，取index
     order = scores.argsort()[::-1]
-    # keep为最后保留的边框
-    keep = []
+    keep = []  # keep为最后保留的边框
     while order.size > 0:
         i = order[0]    # order[0]是当前分数最大的窗口，肯定保留
         keep.append(i)  # 计算窗口i与其他所有窗口的交叠部分的面积
