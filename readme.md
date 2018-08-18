@@ -76,7 +76,7 @@ doc generate
 增加 [作者列表](https://github.com/donghaiwang) 列出贡献的作者。
 
 ## 协议
-
+![](https://img.shields.io/cocoapods/l/AFNetworking.svg)
 遵守MIT协议，这意味着：
 * 你可以自由使用，复制，修改，可以用于自己的项目。
 * 可以免费分发或用来盈利。
@@ -86,6 +86,4 @@ doc generate
 
 * Richard S. Sutton
 * etc
-
-![](https://img.shields.io/cocoapods/l/AFNetworking.svg)
 
