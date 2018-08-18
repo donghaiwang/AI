@@ -80,6 +80,7 @@ doc generate
 * 你可以自由使用，复制，修改，可以用于自己的项目。
 * 可以免费分发或用来盈利。
 * 唯一的限制是必须包含许可声明。
+
 ![](https://img.shields.io/cocoapods/l/AFNetworking.svg)
 
 ## 鸣谢
