@@ -1,88 +1,89 @@
 # 人工智能
 
-解决智能，并用智能解决一切。
+研究领域包括计算机视觉、深度学习、强化学习、自动驾驶。
 
 ## 入门
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+深度强化学习的研究。
 
-### Prerequisites
+### 先决条件
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+开发测试平台win10、Ubuntu14.04
 
 ```
-Give the example
+Matlab 2018a
+Python 3.6
 ```
 
-And repeat
+### 安装
+
+步骤
+
+Matlab
 
 ```
-until finished
+Matlab 2018a
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+Python
 
 ```
-Give an example
+Python 3.6.5 Anaconda
 ```
 
-### And coding style tests
+尽量不依赖平台以外的库（依赖将会列出安装步骤）。
 
-Explain what these tests test and why
+## 测试
+
+（待添加）。
+
+### 分解为自动化测试
+
+测试的目的和内容
 
 ```
-Give an example
+test
 ```
 
-## Deployment
+### 代码风格检查
 
-Add additional notes about how to deploy this on a live system
+为了更好的阅读，采用中文注释，能保证由代码能生成文档。
 
-## Built With
+```
+doc generate
+```
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+## 部署
 
-## Contributing
+最终需要将代码部署到GPU或者机器人上。
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+## 构建工具
 
-## Versioning
+* [Matlab](https://ww2.mathworks.cn/) - 仿真平台
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+## 贡献
 
-## Authors
+欢迎贡献代码。
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+## 版本控制
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+使用git进行项目的管理，详细信息请参考 [git](http://www.runoob.com/git/git-basic-operations.html). 
 
-## License
+## 作者
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+* **DonghaiWang** - *项目初始化工作* - [Github主页](https://github.com/donghaiwang)
 
-## Acknowledgments
+增加 [作者列表](https://github.com/donghaiwang) 列出贡献的作者。
 
-* Hat tip to anyone whose code was used
-* Inspiration
+## 协议
+
+遵守MIT协议，这意味着：
+* 你可以自由使用，复制，修改，可以用于自己的项目。
+* 可以免费分发或用来盈利。
+* 唯一的限制是必须包含许可声明。
+
+## 鸣谢
+
+* Richard S. Sutton
 * etc
 
