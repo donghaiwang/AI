@@ -16,11 +16,11 @@ class Agent(BaseModel):
   def __init__(self, config, environment, sess):
     super(Agent, self).__init__(config)
     self.sess = sess
-    self.weight_dir = 'weights'
+    self.weight_dir = 'weights'  # 存放权重的目录
 
     self.env = environment
     self.history = History(self.config)
-    self.memory = ReplayMemory(self.config, self.model_dir)
+    self.memory = ReplayMemory(self.config, self.model_dir)  # 回放记忆单元
 
     with tf.variable_scope('step'):
       self.step_op = tf.Variable(0, trainable=False, name='step')
