@@ -7,25 +7,26 @@ import numpy as np
 
 from .utils import save_npy, load_npy
 
+# 回放记忆单元
 class ReplayMemory:
   def __init__(self, config, model_dir):
     self.model_dir = model_dir
 
-    self.cnn_format = config.cnn_format
-    self.memory_size = config.memory_size
-    self.actions = np.empty(self.memory_size, dtype = np.uint8)
-    self.rewards = np.empty(self.memory_size, dtype = np.integer)
-    self.screens = np.empty((self.memory_size, config.screen_height, config.screen_width), dtype = np.float16)
-    self.terminals = np.empty(self.memory_size, dtype = np.bool)
-    self.history_length = config.history_length
+    self.cnn_format = config.cnn_format     # 卷积神经网络输入的图片格式：NCHW(GPU)、NHWC（CPU）
+    self.memory_size = config.memory_size   # 回放记忆单元能存放动作的数目
+    self.actions = np.empty(self.memory_size, dtype = np.uint8)     # 所执行的动作放在回放记忆单元中
+    self.rewards = np.empty(self.memory_size, dtype = np.integer)   # 执行动作所获得的奖励
+    self.screens = np.empty((self.memory_size, config.screen_height, config.screen_width), dtype = np.float16)  # 存放一帧一帧数据
+    self.terminals = np.empty(self.memory_size, dtype = np.bool)    # 回放记忆单元中存放的动作是否是终止状态
+    self.history_length = config.history_length                     # 考虑历史帧的数目
     self.dims = (config.screen_height, config.screen_width)
     self.batch_size = config.batch_size
     self.count = 0
     self.current = 0
 
-    # pre-allocate prestates and poststates for minibatch
-    self.prestates = np.empty((self.batch_size, self.history_length) + self.dims, dtype = np.float16)
-    self.poststates = np.empty((self.batch_size, self.history_length) + self.dims, dtype = np.float16)
+    # 为最小批次的前一状态和后一状态预先分配内存 pre-allocate prestates and poststates for minibatch
+    self.prestates = np.empty((self.batch_size, self.history_length) + self.dims, dtype = np.float16)   # 前一状态
+    self.poststates = np.empty((self.batch_size, self.history_length) + self.dims, dtype = np.float16)  # 后一状态
 
   def add(self, screen, reward, action, terminal):
     assert screen.shape == self.dims

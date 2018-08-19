@@ -8,6 +8,8 @@ def clipped_error(x):
   except:
     return tf.where(tf.abs(x) < 1.0, 0.5 * tf.square(x), tf.abs(x) - 0.5)
 
+
+"""二维卷积"""
 def conv2d(x,
            output_dim,
            kernel_size,
@@ -15,8 +17,8 @@ def conv2d(x,
            initializer=tf.contrib.layers.xavier_initializer(),
            activation_fn=tf.nn.relu,
            data_format='NHWC',
-           padding='VALID',
-           name='conv2d'):
+           padding='VALID',  # padding为VALID模式时，很简单粗暴直接从原始图像的首段开始卷积，到最后不能匹配卷积核的部分直接舍去。
+           name='conv2d'):   # padding为SAME模式时，先对原图像进行填充，再做卷积。
   with tf.variable_scope(name):
     if data_format == 'NCHW':
       stride = [1, 1, stride[0], stride[1]]
@@ -36,6 +38,8 @@ def conv2d(x,
 
   return out, w, b
 
+
+"""全连接层"""
 def linear(input_, output_size, stddev=0.02, bias_start=0.0, activation_fn=None, name='linear'):
   shape = input_.get_shape().as_list()
 

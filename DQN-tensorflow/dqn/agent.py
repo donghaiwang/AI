@@ -30,8 +30,9 @@ class Agent(BaseModel):
 
     self.build_dqn()
 
-  def train(self):    # 进行智能体的训练
-    start_step = self.step_op.eval()
+  def train(self):
+    """进行智能体的训练"""
+    start_step = self.step_op.eval()    # 智能体开始的地方
     start_time = time.time()
 
     num_game, self.update_count, ep_reward = 0, 0, 0.
@@ -42,7 +43,7 @@ class Agent(BaseModel):
     screen, reward, action, terminal = self.env.new_random_game()
 
     for _ in range(self.history_length):
-      self.history.add(screen)
+      self.history.add(screen)      # 添加历史帧
 
     for self.step in tqdm(range(start_step, self.max_step), ncols=70, initial=start_step):
       if self.step == self.learn_start:
@@ -50,27 +51,27 @@ class Agent(BaseModel):
         total_reward, self.total_loss, self.total_q = 0., 0., 0.
         ep_rewards, actions = [], []
 
-      # 1. predict
+      # 1. 从历史帧中预测行为 predict
       action = self.predict(self.history.get())
-      # 2. act
+      # 2. 采取行动 act
       screen, reward, terminal = self.env.act(action, is_training=True)
-      # 3. observe
+      # 3. 观察 observe
       self.observe(screen, reward, action, terminal)
 
       if terminal:
-        screen, reward, action, terminal = self.env.new_random_game()
+        screen, reward, action, terminal = self.env.new_random_game()  # 如果当前游戏结束，则新开一局
 
         num_game += 1
         ep_rewards.append(ep_reward)
         ep_reward = 0.
       else:
-        ep_reward += reward
+        ep_reward += reward   # 游戏正在进行，则累积奖励
 
       actions.append(action)
       total_reward += reward
 
       if self.step >= self.learn_start:
-        if self.step % self.test_step == self.test_step - 1:
+        if self.step % self.test_step == self.test_step - 1:  # 每隔test_step步进行一次测试
           avg_reward = total_reward / self.test_step
           avg_loss = self.total_loss / self.update_count
           avg_q = self.total_q / self.update_count
@@ -83,9 +84,9 @@ class Agent(BaseModel):
             max_ep_reward, min_ep_reward, avg_ep_reward = 0, 0, 0
 
           print('\navg_r: %.4f, avg_l: %.6f, avg_q: %3.6f, avg_ep_r: %.4f, max_ep_r: %.4f, min_ep_r: %.4f, # game: %d' \
-              % (avg_reward, avg_loss, avg_q, avg_ep_reward, max_ep_reward, min_ep_reward, num_game))
+              % (avg_reward, avg_loss, avg_q, avg_ep_reward, max_ep_reward, min_ep_reward, num_game))  # 打印出平均奖励、平均损失、平均Q值
 
-          if max_avg_ep_reward * 0.9 <= avg_ep_reward:
+          if max_avg_ep_reward * 0.9 <= avg_ep_reward:    # 平均奖励大于最大平均奖励的90%就保存模型
             self.step_assign_op.eval({self.step_input: self.step + 1})
             self.save_model(self.step + 1)
 
@@ -115,6 +116,7 @@ class Agent(BaseModel):
           actions = []
 
   def predict(self, s_t, test_ep=None):
+    """根据历史帧进行动作的预测"""
     ep = test_ep or (self.ep_end +
         max(0., (self.ep_start - self.ep_end)
           * (self.ep_end_t - max(0., self.step - self.learn_start)) / self.ep_end_t))
@@ -127,30 +129,32 @@ class Agent(BaseModel):
     return action
 
   def observe(self, screen, reward, action, terminal):
+    """agent采取行动后需要观察一下（将当前帧添加到记忆回放单元中、更新目标值网络）"""
     reward = max(self.min_reward, min(self.max_reward, reward))
 
     self.history.add(screen)
     self.memory.add(screen, reward, action, terminal)
 
     if self.step > self.learn_start:
-      if self.step % self.train_frequency == 0:
+      if self.step % self.train_frequency == 0:  # 每隔train_frequency=4步进行一次学习（从回放记忆单元中进行采样学习）
         self.q_learning_mini_batch()
 
-      if self.step % self.target_q_update_step == self.target_q_update_step - 1:
+      if self.step % self.target_q_update_step == self.target_q_update_step - 1:  # 每隔target_q_update_step步就更新一次目标值网络
         self.update_target_q_network()
 
   def q_learning_mini_batch(self):
-    if self.memory.count < self.history_length:
+    """每次从回放记忆单元中随机抽取小批量的转移样本，并使用随机梯度下降算法更新网络参数"""
+    if self.memory.count < self.history_length:  # 当回放记忆单元中的帧数少于需要考虑历史帧的数目，就只要从历史帧学习就行
       return
     else:
       s_t, action, reward, s_t_plus_1, terminal = self.memory.sample()
 
     t = time.time()
     if self.double_q:
-      # Double Q-learning
-      pred_action = self.q_action.eval({self.s_t: s_t_plus_1})
+      # 深度双Q学习 Double Q-learning
+      pred_action = self.q_action.eval({self.s_t: s_t_plus_1})      # 使用当前网络的参数来选择最优动作
 
-      q_t_plus_1_with_pred_action = self.target_q_with_idx.eval({
+      q_t_plus_1_with_pred_action = self.target_q_with_idx.eval({   # 使用目标网络的参数来评估该最优动作
         self.target_s_t: s_t_plus_1,
         self.target_q_idx: [[idx, pred_a] for idx, pred_a in enumerate(pred_action)]
       })
@@ -159,7 +163,7 @@ class Agent(BaseModel):
       q_t_plus_1 = self.target_q.eval({self.target_s_t: s_t_plus_1})
 
       terminal = np.array(terminal) + 0.
-      max_q_t_plus_1 = np.max(q_t_plus_1, axis=1)
+      max_q_t_plus_1 = np.max(q_t_plus_1, axis=1)  # 每次都选取下一个状态中最大Q值所对应的动作（选择和评价动作都是基于目标值网络的参数，这会在学习过程中出现过高估计Q值得问题）
       target_q_t = (1. - terminal) * self.discount * max_q_t_plus_1 + reward
 
     _, q_t, loss, summary_str = self.sess.run([self.optim, self.q, self.loss, self.q_summary], {
@@ -169,7 +173,7 @@ class Agent(BaseModel):
       self.learning_rate_step: self.step,
     })
 
-    self.writer.add_summary(summary_str, self.step)
+    self.writer.add_summary(summary_str, self.step)  # 添加日志
     self.total_loss += loss
     self.total_q += q_t.mean()
     self.update_count += 1
@@ -192,6 +196,7 @@ class Agent(BaseModel):
         self.s_t = tf.placeholder('float32',
             [None, self.history_length, self.screen_height, self.screen_width], name='s_t')  # 历史帧的数目即为通道数
 
+      """三个卷积层"""
       self.l1, self.w['l1_w'], self.w['l1_b'] = conv2d(self.s_t,
           32, [8, 8], [4, 4], initializer, activation_fn, self.cnn_format, name='l1')
       self.l2, self.w['l2_w'], self.w['l2_b'] = conv2d(self.l1,
@@ -221,6 +226,7 @@ class Agent(BaseModel):
         self.q = self.value + (self.advantage - 
           tf.reduce_mean(self.advantage, reduction_indices=1, keep_dims=True))
       else:
+        """两个全连接层"""
         self.l4, self.w['l4_w'], self.w['l4_b'] = linear(self.l3_flat, 512, activation_fn=activation_fn, name='l4')
         self.q, self.w['q_w'], self.w['q_b'] = linear(self.l4, self.env.action_size, name='q')
 
@@ -290,7 +296,7 @@ class Agent(BaseModel):
       self.target_q_t = tf.placeholder('float32', [None], name='target_q_t')
       self.action = tf.placeholder('int64', [None], name='action')
 
-      action_one_hot = tf.one_hot(self.action, self.env.action_size, 1.0, 0.0, name='action_one_hot')
+      action_one_hot = tf.one_hot(self.action, self.env.action_size, 1.0, 0.0, name='action_one_hot')  # 只有一个值为非零
       q_acted = tf.reduce_sum(self.q * action_one_hot, reduction_indices=1, name='q_acted')
 
       self.delta = self.target_q_t - q_acted
@@ -305,9 +311,9 @@ class Agent(BaseModel):
               self.learning_rate_step,
               self.learning_rate_decay_step,
               self.learning_rate_decay,
-              staircase=True))
+              staircase=True))  # 学习率选择设置的值和指数衰减两者较小的值
       self.optim = tf.train.RMSPropOptimizer(
-          self.learning_rate_op, momentum=0.95, epsilon=0.01).minimize(self.loss)
+          self.learning_rate_op, momentum=0.95, epsilon=0.01).minimize(self.loss)  # RootMeanSquarePropagation，求解损失最小
 
     # 对之前的值求和
     with tf.variable_scope('summary'):
@@ -327,7 +333,7 @@ class Agent(BaseModel):
         self.summary_placeholders[tag] = tf.placeholder('float32', None, name=tag.replace(' ', '_'))
         self.summary_ops[tag]  = tf.summary.histogram(tag, self.summary_placeholders[tag])
 
-      self.writer = tf.summary.FileWriter('./logs/%s' % self.model_dir, self.sess.graph)
+      self.writer = tf.summary.FileWriter('./logs/%s' % self.model_dir, self.sess.graph)  # 用于写日志文件
 
     tf.initialize_all_variables().run()  # 初始化上面定义的所有变量
 
@@ -342,6 +348,7 @@ class Agent(BaseModel):
       self.t_w_assign_op[name].eval({self.t_w_input[name]: self.w[name].eval()})
 
   def save_weight_to_pkl(self):
+    """将权重保存成.pkl文件"""
     if not os.path.exists(self.weight_dir):
       os.makedirs(self.weight_dir)
 
@@ -363,14 +370,15 @@ class Agent(BaseModel):
     self.update_target_q_network()
 
   def inject_summary(self, tag_dict, step):
+    """将概要信息保存成文件"""
     summary_str_lists = self.sess.run([self.summary_ops[tag] for tag in tag_dict.keys()], {
       self.summary_placeholders[tag]: value for tag, value in tag_dict.items()
     })
     for summary_str in summary_str_lists:
       self.writer.add_summary(summary_str, self.step)
 
-  # 不进行训练（仅仅演示）
   def play(self, n_step=10000, n_episode=100, test_ep=None, render=False):
+    """不进行训练（仅仅演示）"""
     if test_ep == None:
       test_ep = self.ep_end
 
@@ -378,7 +386,7 @@ class Agent(BaseModel):
 
     if not self.display:
       gym_dir = '/tmp/%s-%s' % (self.env_name, get_time())
-      self.env.env.monitor.start(gym_dir)
+      self.env.env.monitor.start(gym_dir)  # 从gym目录中读入数据进行显示
 
     best_reward, best_idx = 0, 0
     for idx in xrange(n_episode):
