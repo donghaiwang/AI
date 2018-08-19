@@ -22,10 +22,11 @@ class Agent(BaseModel):
     self.history = History(self.config)
     self.memory = ReplayMemory(self.config, self.model_dir)  # 回放记忆单元
 
-    with tf.variable_scope('step'):
-      self.step_op = tf.Variable(0, trainable=False, name='step')
+    # 事先需要设置（打开文件），事后做清理工作（关闭文件）
+    with tf.variable_scope('step'):  # 生成一个上下文管理器(step)，就可以直接通过tf.get_variable获取已经生成的变量。
+      self.step_op = tf.Variable(0, trainable=False, name='step')  # 在默认的图中创建节点，这个节点是一个变量
       self.step_input = tf.placeholder('int32', None, name='step_input')
-      self.step_assign_op = self.step_op.assign(self.step_input)
+      self.step_assign_op = self.step_op.assign(self.step_input)  # 赋值操作
 
     self.build_dqn()
 
@@ -174,6 +175,7 @@ class Agent(BaseModel):
     self.update_count += 1
 
   def build_dqn(self):
+    """构建深度Q网络"""
     self.w = {}
     self.t_w = {}
 
@@ -181,14 +183,14 @@ class Agent(BaseModel):
     initializer = tf.truncated_normal_initializer(0, 0.02)
     activation_fn = tf.nn.relu
 
-    # training network
+    # 当前值网络（训练网路）
     with tf.variable_scope('prediction'):
-      if self.cnn_format == 'NHWC':
+      if self.cnn_format == 'NHWC':  # 在CPU上
         self.s_t = tf.placeholder('float32',
             [None, self.screen_height, self.screen_width, self.history_length], name='s_t')
-      else:
+      else:   # 在GPU上训练
         self.s_t = tf.placeholder('float32',
-            [None, self.history_length, self.screen_height, self.screen_width], name='s_t')
+            [None, self.history_length, self.screen_height, self.screen_width], name='s_t')  # 历史帧的数目即为通道数
 
       self.l1, self.w['l1_w'], self.w['l1_b'] = conv2d(self.s_t,
           32, [8, 8], [4, 4], initializer, activation_fn, self.cnn_format, name='l1')
@@ -200,7 +202,8 @@ class Agent(BaseModel):
       shape = self.l3.get_shape().as_list()
       self.l3_flat = tf.reshape(self.l3, [-1, reduce(lambda x, y: x * y, shape[1:])])
 
-      if self.dueling:
+      if self.dueling:  # 如果是基于竞争架构的DQN（将CNN提取的抽象特征分流为 状态值流、（依赖状态的）动作优势流）
+        # 通过竞争网络结构，agent可以在策略评估过程中更快地识别出正确的行为（使值函数的估计更加精确）
         self.value_hid, self.w['l4_val_w'], self.w['l4_val_b'] = \
             linear(self.l3_flat, 512, activation_fn=activation_fn, name='value_hid')
 
@@ -208,12 +211,13 @@ class Agent(BaseModel):
             linear(self.l3_flat, 512, activation_fn=activation_fn, name='adv_hid')
 
         self.value, self.w['val_w_out'], self.w['val_w_b'] = \
-          linear(self.value_hid, 1, name='value_out')
+          linear(self.value_hid, 1, name='value_out')                 # 状态值流
 
         self.advantage, self.w['adv_w_out'], self.w['adv_w_b'] = \
-          linear(self.adv_hid, self.env.action_size, name='adv_out')
+          linear(self.adv_hid, self.env.action_size, name='adv_out')  # 动作优势流
 
-        # Average Dueling
+        # Average Dueling 动作优势流=单独动作优势函数-某状态下所有动作优势函数的平均值
+        # 该技巧不仅可以保证该状态下各动作优势函数的相对排序不变，而且可以缩小Q的范围，去除多余的自由度
         self.q = self.value + (self.advantage - 
           tf.reduce_mean(self.advantage, reduction_indices=1, keep_dims=True))
       else:
@@ -228,7 +232,7 @@ class Agent(BaseModel):
         q_summary.append(tf.summary.histogram('q/%s' % idx, avg_q[idx]))
       self.q_summary = tf.summary.merge(q_summary, 'q_summary')
 
-    # target network
+    # 目标值网络  上下文管理器
     with tf.variable_scope('target'):
       if self.cnn_format == 'NHWC':
         self.target_s_t = tf.placeholder('float32', 
@@ -247,7 +251,7 @@ class Agent(BaseModel):
       shape = self.target_l3.get_shape().as_list()
       self.target_l3_flat = tf.reshape(self.target_l3, [-1, reduce(lambda x, y: x * y, shape[1:])])
 
-      if self.dueling:
+      if self.dueling:  # 如果是基于竞争架构的DQN
         self.t_value_hid, self.t_w['l4_val_w'], self.t_w['l4_val_b'] = \
             linear(self.target_l3_flat, 512, activation_fn=activation_fn, name='target_value_hid')
 
@@ -272,6 +276,7 @@ class Agent(BaseModel):
       self.target_q_idx = tf.placeholder('int32', [None, None], 'outputs_idx')
       self.target_q_with_idx = tf.gather_nd(self.target_q, self.target_q_idx)
 
+    # 预测目标
     with tf.variable_scope('pred_to_target'):
       self.t_w_input = {}
       self.t_w_assign_op = {}
@@ -280,7 +285,7 @@ class Agent(BaseModel):
         self.t_w_input[name] = tf.placeholder('float32', self.t_w[name].get_shape().as_list(), name=name)
         self.t_w_assign_op[name] = self.t_w[name].assign(self.t_w_input[name])
 
-    # optimizer
+    # optimizer 求解器
     with tf.variable_scope('optimizer'):
       self.target_q_t = tf.placeholder('float32', [None], name='target_q_t')
       self.action = tf.placeholder('int64', [None], name='action')
@@ -304,6 +309,7 @@ class Agent(BaseModel):
       self.optim = tf.train.RMSPropOptimizer(
           self.learning_rate_op, momentum=0.95, epsilon=0.01).minimize(self.loss)
 
+    # 对之前的值求和
     with tf.variable_scope('summary'):
       scalar_summary_tags = ['average.reward', 'average.loss', 'average.q', \
           'episode.max reward', 'episode.min reward', 'episode.avg reward', 'episode.num of game', 'training.learning_rate']
@@ -323,14 +329,15 @@ class Agent(BaseModel):
 
       self.writer = tf.summary.FileWriter('./logs/%s' % self.model_dir, self.sess.graph)
 
-    tf.initialize_all_variables().run()
+    tf.initialize_all_variables().run()  # 初始化上面定义的所有变量
 
-    self._saver = tf.train.Saver(self.w.values() + [self.step_op], max_to_keep=30)
+    self._saver = tf.train.Saver(self.w.values() + [self.step_op], max_to_keep=30)  # 定期保存训练模型
 
     self.load_model()
-    self.update_target_q_network()
+    self.update_target_q_network()  # 用当前值网络的参数，每隔N时间步更新目标值网络
 
   def update_target_q_network(self):
+    """每隔N时间步拷贝参数，更新目标值网络"""
     for name in self.w.keys():
       self.t_w_assign_op[name].eval({self.t_w_input[name]: self.w[name].eval()})
 

@@ -4,23 +4,23 @@ class AgentConfig(object):
   display = False    # 是否显示游戏画面
 
   max_step = 5000 * scale
-  memory_size = 100 * scale
+  memory_size = 100 * scale               # 内存大小
 
   batch_size = 32
   random_start = 30
   cnn_format = 'NCHW'                     # GPU的输入图片格式
   discount = 0.99                         # 折扣因子
-  target_q_update_step = 1 * scale
+  target_q_update_step = 1 * scale        # 目标Q值更新的频率
   learning_rate = 0.00025
-  learning_rate_minimum = 0.00025
-  learning_rate_decay = 0.96
-  learning_rate_decay_step = 5 * scale
+  learning_rate_minimum = 0.00025         # 最小学习率
+  learning_rate_decay = 0.96              # 学习率衰减因子
+  learning_rate_decay_step = 5 * scale    # 学习率衰减的频率
 
   ep_end = 0.1
   ep_start = 1.
   ep_end_t = memory_size
 
-  history_length = 4
+  history_length = 4          # 考虑历史帧的数目
   train_frequency = 4
   learn_start = 5. * scale
 
@@ -36,10 +36,10 @@ class AgentConfig(object):
 class EnvironmentConfig(object):
   env_name = 'Breakout-v0'
 
-  screen_width  = 84
-  screen_height = 84
-  max_reward = 1.
-  min_reward = -1.
+  screen_width  = 84  # 游戏屏幕的宽度
+  screen_height = 84  # 高度
+  max_reward = 1.     # 最大奖励+1
+  min_reward = -1.    # 最小奖励-1
 
 class DQNConfig(AgentConfig, EnvironmentConfig):
   model = ''
