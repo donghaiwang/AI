@@ -6,6 +6,8 @@ import numpy as np
 from tqdm import tqdm
 import tensorflow as tf
 
+import functools
+
 from .base import BaseModel
 from .history import History
 from .replay_memory import ReplayMemory
@@ -205,7 +207,7 @@ class Agent(BaseModel):
           64, [3, 3], [1, 1], initializer, activation_fn, self.cnn_format, name='l3')
 
       shape = self.l3.get_shape().as_list()
-      self.l3_flat = tf.reshape(self.l3, [-1, reduce(lambda x, y: x * y, shape[1:])])
+      self.l3_flat = tf.reshape(self.l3, [-1, functools.reduce(lambda x, y: x * y, shape[1:])])  # reduce已经从python3内置函数中移除，放入functools模块中
 
       if self.dueling:  # 如果是基于竞争架构的DQN（将CNN提取的抽象特征分流为 状态值流、（依赖状态的）动作优势流）
         # 通过竞争网络结构，agent可以在策略评估过程中更快地识别出正确的行为（使值函数的估计更加精确）
@@ -234,7 +236,7 @@ class Agent(BaseModel):
 
       q_summary = []
       avg_q = tf.reduce_mean(self.q, 0)
-      for idx in xrange(self.env.action_size):
+      for idx in range(self.env.action_size):  # Python3已经将xrange改为range
         q_summary.append(tf.summary.histogram('q/%s' % idx, avg_q[idx]))
       self.q_summary = tf.summary.merge(q_summary, 'q_summary')
 
@@ -255,7 +257,7 @@ class Agent(BaseModel):
           64, [3, 3], [1, 1], initializer, activation_fn, self.cnn_format, name='target_l3')
 
       shape = self.target_l3.get_shape().as_list()
-      self.target_l3_flat = tf.reshape(self.target_l3, [-1, reduce(lambda x, y: x * y, shape[1:])])
+      self.target_l3_flat = tf.reshape(self.target_l3, [-1, functools.reduce(lambda x, y: x * y, shape[1:])])
 
       if self.dueling:  # 如果是基于竞争架构的DQN
         self.t_value_hid, self.t_w['l4_val_w'], self.t_w['l4_val_b'] = \
@@ -333,11 +335,12 @@ class Agent(BaseModel):
         self.summary_placeholders[tag] = tf.placeholder('float32', None, name=tag.replace(' ', '_'))
         self.summary_ops[tag]  = tf.summary.histogram(tag, self.summary_placeholders[tag])
 
-      self.writer = tf.summary.FileWriter('./logs/%s' % self.model_dir, self.sess.graph)  # 用于写日志文件
+      # self.writer = tf.summary.FileWriter('./logs/%s' % self.model_dir, self.sess.graph)  # 用于写日志文件
+      self.writer = tf.summary.FileWriter('agent.log', self.sess.graph)  # 用于写日志文件
 
     tf.initialize_all_variables().run()  # 初始化上面定义的所有变量
 
-    self._saver = tf.train.Saver(self.w.values() + [self.step_op], max_to_keep=30)  # 定期保存训练模型
+    self._saver = tf.train.Saver(list(self.w.values()) + [self.step_op], max_to_keep=30)  # 定期保存训练模型（强制转换为list，不然不能相加）
 
     self.load_model()
     self.update_target_q_network()  # 用当前值网络的参数，每隔N时间步更新目标值网络

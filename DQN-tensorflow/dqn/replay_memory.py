@@ -16,7 +16,7 @@ class ReplayMemory:
     self.memory_size = config.memory_size   # 回放记忆单元能存放动作的数目
     self.actions = np.empty(self.memory_size, dtype = np.uint8)     # 所执行的动作放在回放记忆单元中
     self.rewards = np.empty(self.memory_size, dtype = np.integer)   # 执行动作所获得的奖励
-    self.screens = np.empty((self.memory_size, config.screen_height, config.screen_width), dtype = np.float16)  # 存放一帧一帧数据
+    self.screens = np.empty((self.memory_size, config.screen_height, config.screen_width), dtype = np.float16)  # 存放一帧一帧数据（可能显示MemoryError：内存不够）
     self.terminals = np.empty(self.memory_size, dtype = np.bool)    # 回放记忆单元中存放的动作是否是终止状态
     self.history_length = config.history_length                     # 考虑历史帧的数目
     self.dims = (config.screen_height, config.screen_width)
