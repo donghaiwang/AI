@@ -198,7 +198,7 @@ class Agent(BaseModel):
 
       """三个卷积层"""
       self.l1, self.w['l1_w'], self.w['l1_b'] = conv2d(self.s_t,
-          32, [8, 8], [4, 4], initializer, activation_fn, self.cnn_format, name='l1')
+          32, [8, 8], [4, 4], initializer, activation_fn, self.cnn_format, name='l1')  # 32个8×8的过滤器，步长为4
       self.l2, self.w['l2_w'], self.w['l2_b'] = conv2d(self.l1,
           64, [4, 4], [2, 2], initializer, activation_fn, self.cnn_format, name='l2')
       self.l3, self.w['l3_w'], self.w['l3_b'] = conv2d(self.l2,
