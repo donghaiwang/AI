@@ -37,23 +37,24 @@ class BaseModel(object):
     self.saver.save(self.sess, self.checkpoint_dir, global_step=step)
 
   def load_model(self):
+    """加载检查点模型"""
     print(" [*] Loading checkpoints...")
 
     ckpt = tf.train.get_checkpoint_state(self.checkpoint_dir)
-    if ckpt and ckpt.model_checkpoint_path:
+    if ckpt and ckpt.model_checkpoint_path:  # 加载训练好的模型
       ckpt_name = os.path.basename(ckpt.model_checkpoint_path)
       fname = os.path.join(self.checkpoint_dir, ckpt_name)
       self.saver.restore(self.sess, fname)
       print(" [*] Load SUCCESS: %s" % fname)
       return True
     else:
-      print(" [!] Load FAILED: %s" % self.checkpoint_dir)
+      print(" [!] Load FAILED: %s" % self.checkpoint_dir)   # 加载检查点失败，重新开始训练
       return False
 
   @property
   def checkpoint_dir(self):
     checkpoints_dir = os.path.join('checkpoints', self.model_dir)
-    checkpoints_dir.replace('\\', '/')  # 避免出现'\\'
+    checkpoints_dir = checkpoints_dir.replace('\\', '/')  # 避免出现'\\'
     return checkpoints_dir
 
   @property
