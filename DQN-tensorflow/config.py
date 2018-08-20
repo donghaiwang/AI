@@ -56,9 +56,9 @@ def get_config(FLAGS):  # main.py用来加载配置的方法（FLAGS用来传递
   elif FLAGS.model == 'm2':
     config = M2
 
-  # for k, v in FLAGS.__dict__['__flags'].items():  # FLAGS changed after 1.4
-  for k in FLAGS:
-    v = FLAGS[k].value
+  for k, v in FLAGS.__dict__['__flags'].items():  # FLAGS changed after 1.4
+  # for k in FLAGS:
+    # v = FLAGS[k].value
     if k == 'gpu':
       if v == False:                # 在TensorFlow中张量的默认Channel维度在末尾（在CPU代码里运行）
         config.cnn_format = 'NHWC'  # 使用CPU的话就用输入数据格式：NHWC

@@ -26,7 +26,21 @@ Matlab 2018a
 Python
 
 ```
-Python 3.6.5 Anaconda
+Python 3.6.5(Anaconda3-5.2.0)
+添加环境变量：C:\Users\dong\Anaconda3
+			 C:\Users\dong\Anaconda3\Scripts
+pip install opencv_python-3.4.2-cp36-cp36m-win_amd64.whl
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple tqdm
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple gym==0.7.0
+pip install --no-index -f https://github.com/Kojoley/atari-py/releases atari_py
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple tensorflow-gpu==1.8.0
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple tensorflow-gpu==1.4.0
+安装CUDA8.0、cuDNN6
+安装pycharm-professional-2017.3
+	c:\Windows\System32\Drivers\etc\hosts 添加
+		0.0.0.0 account.jetbrains.com
+	[激活码](https://raw.githubusercontent.com/donghaiwang/AI/master/tools/PycharmActivationCode.txt)
+git clone https://github.com/donghaiwang/AI.git
 ```
 
 尽量不依赖平台以外的库（依赖将会列出安装步骤）。
