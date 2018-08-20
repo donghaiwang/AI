@@ -32,6 +32,7 @@ class BaseModel(object):
     print(" [*] Saving checkpoints...")
     model_name = type(self).__name__
 
+    self.checkpoint_dir = self.checkpoint_dir.replace('\\', '/')  # 避免出现'\\'
     if not os.path.exists(self.checkpoint_dir):
       os.makedirs(self.checkpoint_dir)
     self.saver.save(self.sess, self.checkpoint_dir, global_step=step)
