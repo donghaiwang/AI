@@ -39,6 +39,13 @@ def py_cpu_nms(dets, thresh):
 
 def detectGesture():
     """交警动作识别"""
+
+    nmsThresh = 0.1
+    labels = {0: 'go_straight', 1: 'park_right', 2: 'stop', 3: 'turn_right'}
+
+    patchHt = 300
+    patchWd = patchHt / 3
+
     gestureModel = onnx.load('assets/gesture.onnx')
     gestureTF = prepare(gestureModel)  # tf_rep是一个python类，里面包含predict_net
     #
@@ -53,12 +60,6 @@ def detectGesture():
     imgWd = 640
     img = imresize(imgRaw, (imgHt, imgWd))  # [高度，宽度，深度]
     VrHt = [imgHt - 30, imgHt]
-
-    nmsThresh = 0.1
-    labels = {0: 'go_straight', 1: 'park_right', 2: 'stop', 3: 'turn_right'}
-
-    patchHt = 300
-    patchWd = patchHt / 3
 
     PatchCount = ((imgWd - patchWd) / 20) + 2
     maxPatchCount = int(PatchCount * 2)
