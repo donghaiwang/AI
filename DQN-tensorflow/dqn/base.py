@@ -60,10 +60,10 @@ class BaseModel(object):
   @property
   def model_dir(self):
     model_dir = self.config.env_name
-    for k, v in self._attrs.items():
-      if not k.startswith('_') and k not in ['display']:
-        model_dir += "/%s-%s" % (k, ",".join([str(i) for i in v])
-            if type(v) == list else v)
+    # for k, v in self._attrs.items():  # 注释掉防止文件名过长报错
+    #   if not k.startswith('_') and k not in ['display']:
+    #     model_dir += "/%s-%s" % (k, ",".join([str(i) for i in v])
+    #         if type(v) == list else v)
     return model_dir + '/'
 
   @property
