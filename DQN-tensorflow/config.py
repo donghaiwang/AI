@@ -7,7 +7,7 @@ class AgentConfig(object):
   memory_size = 60 * scale               # 内存大小（原来是：100*scale）
 
   batch_size = 32
-  random_start = 30
+  random_start = 30                       # 0-29个游戏（随机选择）
   cnn_format = 'NCHW'                     # GPU的输入图片格式
   discount = 0.99                         # 折扣因子
   target_q_update_step = 1 * scale        # 目标Q值更新的频率

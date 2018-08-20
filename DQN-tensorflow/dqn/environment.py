@@ -39,7 +39,7 @@ class Environment(object):
     action = self.env.action_space.sample()
     self._step(action)
 
-  @ property
+  @ property  # 该属性很可能不是直接暴露的，而是通过getter和setter方法来实现的
   def screen(self):
     return imresize(rgb2gray(self._screen)/255., self.dims)  # utils.py里的工具函数
     #return cv2.resize(cv2.cvtColor(self._screen, cv2.COLOR_BGR2YCR_CB)/255., self.dims)[:,:,0]
