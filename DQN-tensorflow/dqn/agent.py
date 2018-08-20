@@ -7,6 +7,7 @@ from tqdm import tqdm
 import tensorflow as tf
 
 import functools
+from gym import wrappers
 
 from .base import BaseModel
 from .history import History
@@ -388,11 +389,12 @@ class Agent(BaseModel):
     test_history = History(self.config)
 
     if not self.display:
-      gym_dir = '/tmp/%s-%s' % (self.env_name, get_time())
-      self.env.env.monitor.start(gym_dir)  # 从gym目录中读入数据进行显示
+      gym_dir = 'tmp/%s-%s' % (self.env_name, time.time())  # 文件夹名中不能包含冒号（:）
+      # self.env.env.monitor.start(gym_dir)  # 从gym目录中读入数据进行显示 （语法废除了）
+      self.env.env = wrappers.Monitor(self.env.env, gym_dir)  # 'tmp/Breakout-v0-2018-08-20_07:18:36'
 
     best_reward, best_idx = 0, 0
-    for idx in xrange(n_episode):
+    for idx in range(n_episode):
       screen, reward, action, terminal = self.env.new_random_game()
       current_reward = 0
 
@@ -420,5 +422,6 @@ class Agent(BaseModel):
       print("="*30)
 
     if not self.display:
-      self.env.env.monitor.close()
+      # self.env.env.monitor.close()
+      self.env.env.close()
       #gym.upload(gym_dir, writeup='https://github.com/devsisters/DQN-tensorflow', api_key='')
