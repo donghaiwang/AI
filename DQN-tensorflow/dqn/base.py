@@ -52,7 +52,9 @@ class BaseModel(object):
 
   @property
   def checkpoint_dir(self):
-    return os.path.join('checkpoints', self.model_dir)
+    checkpoints_dir = os.path.join('checkpoints', self.model_dir)
+    checkpoints_dir.replace('\\', '/')  # 避免出现'\\'
+    return checkpoints_dir
 
   @property
   def model_dir(self):
