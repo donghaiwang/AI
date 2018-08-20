@@ -33,15 +33,17 @@ pip install opencv_python-3.4.2-cp36-cp36m-win_amd64.whl
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple tqdm
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple gym==0.7.0
 pip install --no-index -f https://github.com/Kojoley/atari-py/releases atari_py
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple tensorflow-gpu==1.8.0
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple tensorflow-gpu==1.4.0
-安装CUDA8.0、cuDNN6
-安装pycharm-professional-2017.3
-	c:\Windows\System32\Drivers\etc\hosts 添加
-		0.0.0.0 account.jetbrains.com
-	[激活码](https://raw.githubusercontent.com/donghaiwang/AI/master/tools/PycharmActivationCode.txt)
 git clone https://github.com/donghaiwang/AI.git
 ```
+
+安装CUDA8.0：配置PATH路径，C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0 （另外包括v8.0\bin、v8.0\lib\x64、v8.0\libnvvp）。
+安装cuDNN6：将压缩包里的bin、include、bin文件间拷贝到CUDA8.0安装的对应目录。
+
+安装pycharm-professional-2017.3
+	C:\Windows\System32\Drivers\etc\hosts 添加
+		0.0.0.0 account.jetbrains.com
+	[激活码](https://raw.githubusercontent.com/donghaiwang/AI/master/tools/PycharmActivationCode.txt)
 
 尽量不依赖平台以外的库（依赖将会列出安装步骤）。
 
