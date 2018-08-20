@@ -1,9 +1,9 @@
 # 智能体的配置文件
 class AgentConfig(object):
-  scale = 10000
+  scale = 100
   display = False    # 是否显示游戏画面
 
-  max_step = 5000 * scale
+  max_step = 50 * scale
   memory_size = 60 * scale               # 内存大小（原来是：100*scale）
 
   batch_size = 32
