@@ -2,7 +2,7 @@ import tensorflow as tf
 from tensorflow.contrib.layers.python.layers import initializers
 
 def clipped_error(x):
-  # Huber loss
+  # Huber loss: 当残差（residual）很小的时候，loss函数为l2范数，残差大的时候，为l1范数的线性函数(对离群点（outliers)没有那么敏感)
   try:
     return tf.select(tf.abs(x) < 1.0, 0.5 * tf.square(x), tf.abs(x) - 0.5)
   except:
@@ -20,7 +20,7 @@ def conv2d(x,
            padding='VALID',  # padding为VALID模式时，很简单粗暴直接从原始图像的首段开始卷积，到最后不能匹配卷积核的部分直接舍去。
            name='conv2d'):   # padding为SAME模式时，先对原图像进行填充，再做卷积。
   with tf.variable_scope(name):
-    if data_format == 'NCHW':
+    if data_format == 'NCHW':  # GPU训练
       stride = [1, 1, stride[0], stride[1]]
       kernel_shape = [kernel_size[0], kernel_size[1], x.get_shape()[1], output_dim]
     elif data_format == 'NHWC':
