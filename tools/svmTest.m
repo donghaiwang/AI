@@ -1,7 +1,11 @@
 clear;
 clc;
 
-featureFiles = dir('D:\tmp\feature\feature_label_2');
+featureFiles = dir('D:\tmp\feature\feature_label_1');
+% 加载类别标签
+classNames = importdata('D:\tmp\feature\cla1_labels.list');
+classNames = classNames';
+
 DEBUG = false;
 
 %%
@@ -32,21 +36,22 @@ end
 
 label = label';  % 转置成列向量
 
-SVMModel = fitcecoc(trainData,label);
+% SVMModel = fitcecoc(trainData,label);
+% CodingMat = SVMModel.CodingMatrix;
+% isLoss = resubLoss(SVMModel);   % 准确率 0.0474
+% 0.7450 (1)
+% 0.9842 (2)
 
-CodingMat = SVMModel.CodingMatrix;
-
-isLoss = resubLoss(SVMModel);   % 准确率 0.0474
-% 0.7450
-% 
 
 %% 交叉验证
-% t = templateSVM('Standardize',1)
-% 
-% Mdl = fitcecoc(trainData, label, 'Learners',t,...
-%     'ClassNames',{'setosa','versicolor','virginica'});
-% 
-% CVMdl = crossval(Mdl);
-% 
-% oosLoss = kfoldLoss(CVMdl)
+t = templateSVM('Standardize',1);
+
+Mdl = fitcecoc(trainData, label, 'Learners',t,...
+    'ClassNames', classNames);
+
+CVMdl = crossval(Mdl);
+
+oosLoss = kfoldLoss(CVMdl);
+% 0.1230 (1)
+% 0.0603 (2)
 
