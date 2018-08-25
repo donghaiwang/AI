@@ -9,7 +9,7 @@ from config import get_config
 flags = tf.app.flags
 
 # 添加命令行的可选参数，可以在命令行使用-h查看帮助信息
-# 模型
+# 加载的模型
 flags.DEFINE_string('model', 'm1', 'Type of model')  # 模型类型
 flags.DEFINE_boolean('dueling', False, 'Whether to use dueling deep q-network')  # 决定是否使用竞争深度Q网络（默认不使用）
 flags.DEFINE_boolean('double_q', False, 'Whether to use double q-learning')      # 决定是否使用双Q网络（默认不使用）

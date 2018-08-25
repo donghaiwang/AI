@@ -1,9 +1,9 @@
 clear;
 clc;
 
-featureFiles = dir('D:\tmp\feature\feature_label_1');
+featureFiles = dir('D:\tmp\feature\3\feature_label_train');
 % 加载类别标签
-classNames = importdata('D:\tmp\feature\cla1_labels.list');
+classNames = importdata('D:\tmp\feature\cla3_labels.list');
 classNames = classNames';
 
 DEBUG = false;
@@ -54,4 +54,6 @@ CVMdl = crossval(Mdl);
 oosLoss = kfoldLoss(CVMdl);
 % 0.1230 (1)
 % 0.0603 (2)
+% 0.3330 (3)
+% matlab版SVM分类准确率，交通灯：87.7%；交通标志94.9%；地面箭头：66.7%
 
