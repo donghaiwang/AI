@@ -4,13 +4,12 @@ import random
 from gym import spaces
 import gym
 
+SECOND_ = {'render.modes': ['human', 'rgb_array'], 'video.frames_per_second': 2}
+
 logger = logging.getLogger(__name__)
 
 class GridEnv(gym.Env):
-    metadata = {
-        'render.modes': ['human', 'rgb_array'],
-        'video.frames_per_second': 2
-    }
+    metadata = SECOND_
 
     def __init__(self):
 
