@@ -26,7 +26,9 @@ figure;
 for i = 1 : length(testImageFiles)
     testImage = imread(testImageFiles{i});
     [bboxes, scores] = detect(fasterRCNN, testImage);
-    testImage = insertObjectAnnotation(testImage, 'rectangle', bboxes, scores);
+    if ~isempty(bboxes)
+        testImage = insertObjectAnnotation(testImage, 'rectangle', bboxes, scores);
+    end
     imshow(testImage);
     writeVideo(aviobj, testImage);
 end
