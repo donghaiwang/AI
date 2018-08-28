@@ -2,7 +2,7 @@
 %% Detect Vehicles on Highway
 % Detect cars in a single image and annotate the image with the detection scores. To detect cars, use a Faster R-CNN object detector that was trained using images of vehicles.
 % Load the pretrained detector.
-fasterRCNN = vehicleDetectorFasterRCNN('front');
+fasterRCNN = vehicleDetectorFasterRCNN('full-view');
 
 % Use the detector on a loaded image. Store the locations of the bounding boxes and their detection scores.
 % I = imread('highway.png');
