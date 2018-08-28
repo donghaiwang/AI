@@ -22,12 +22,12 @@ open(aviobj);
 testImagePath = fullfile('..', 'data', 'test', 'image');
 testImageDataStore = imageDatastore(testImagePath);
 testImageFiles = testImageDataStore.Files;
-% figure;
+figure;
 for i = 1 : length(testImageFiles)
     testImage = imread(testImageFiles{i});
     [bboxes, scores] = detect(fasterRCNN, testImage);
     testImage = insertObjectAnnotation(testImage, 'rectangle', bboxes, scores);
-%     imshow(testImage);
+    imshow(testImage);
     writeVideo(aviobj, testImage);
 end
 close(aviobj);
