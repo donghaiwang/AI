@@ -44,9 +44,107 @@
 % label additional videos or images for training, you can use the
 % |groundTruthLabeler| app.
 
-% Load vehicle data set
-data = load('fasterRCNNVehicleTrainingData.mat');
-vehicleDataset = data.vehicleTrainingData;
+curFolder = pwd;
+sepPos = strfind(curFolder, filesep);
+upLevelPath = curFolder(1 : sepPos(end));   % 当前目录的上一级目录
+
+labelTrainDataPath = fullfile(upLevelPath, 'data', 'bdd100k', 'labels', '100k', 'train');
+labelValDataPath = fullfile(upLevelPath, 'data', 'bdd100k', 'labels', '100k', 'val');
+imageTrainDataPath = fullfile(upLevelPath, 'data', 'bdd100k', 'images', '100k', 'train');
+imageValDataPath = fullfile(upLevelPath, 'data', 'bdd100k', 'images', '100k', 'val');
+
+recognitionLabels = {'bus', 'car', 'truck'};
+
+
+%% 加载训练集
+labelsDirs = dir(labelTrainDataPath);
+
+imageFilename = {};
+busBBox = [];
+carBBox = [];
+truckBBox = [];
+trainingData = table(imageFilename, busBBox, carBBox, truckBBox);
+
+for i = 1 : length(labelsDirs)
+    labelFileName = labelsDirs(i).name;
+    if ~strcmp(labelFileName, '.') && ~strcmp(labelFileName, '..')
+        labelFullfile = fullfile(labelsDirs(i).folder, labelFileName);
+        labelData = loadjson(labelFullfile);
+        labelObjects = labelData.frames{1,1}.objects;
+        busBBox = [];  carBBox = [];  truckBBox = [];
+        trainImageFilename = fullfile(imageTrainDataPath, [labelFileName(1:end-4), 'jpg']);  % 训练图片的完整路径
+        hasBox = false;  % 如果没有包含车子，则跳过这个数据
+        if ~isempty(labelObjects)
+            [~, labelObjectNum] = size(labelObjects);
+            for objIndex = 1 : labelObjectNum
+                labelObject = labelObjects{1, objIndex};    % 每一个标注框
+                if (ismember(labelObject.category, recognitionLabels))
+                    hasBox = true;
+                    bbox2d = labelObject.box2d;
+                    bbox = [bbox2d.x1, bbox2d.y1, bbox2d.x2, bbox2d.y2];
+                    if (strcmp(labelObject.category, 'bus'))
+                        busBBox = [busBBox; bbox];  % 添加box（double数组增加一行）
+                    end
+                    if (strcmp(labelObject.category, 'car'))
+                        carBBox = [carBBox; bbox];
+                    end
+                    if (strcmp(labelObject.category, 'truck'))
+                        truckBBox = [truckBBox; bbox];
+                    end
+                end
+            end
+        end
+        if hasBox
+            addedRow = {trainImageFilename, busBBox, carBBox, truckBBox};
+            trainingData = [trainingData; addedRow];
+        end
+    end
+end
+
+%% 加载验证集
+valDirs = dir(labelValDataPath);
+
+imageFilename = {};
+busBBox = [];
+carBBox = [];
+truckBBox = [];
+testData = table(imageFilename, busBBox, carBBox, truckBBox);
+
+for i = 1 : length(valDirs)
+    labelFileName = valDirs(i).name;
+    if ~strcmp(labelFileName, '.') && ~strcmp(labelFileName, '..')
+        labelFullfile = fullfile(valDirs(i).folder, labelFileName);
+        labelData = loadjson(labelFullfile);
+        labelObjects = labelData.frames{1,1}.objects;
+        busBBox = [];  carBBox = [];  truckBBox = [];
+        valImageFilename = fullfile(imageValDataPath, [labelFileName(1:end-4), 'jpg']);  % 训练图片的完整路径
+        hasBox = false;  % 如果没有包含车子，则跳过这个数据
+        if ~isempty(labelObjects)
+            [~, labelObjectNum] = size(labelObjects);
+            for objIndex = 1 : labelObjectNum
+                labelObject = labelObjects{1, objIndex};    % 每一个标注框
+                if (ismember(labelObject.category, recognitionLabels))
+                    hasBox = true;
+                    bbox2d = labelObject.box2d;
+                    bbox = [bbox2d.x1, bbox2d.y1, bbox2d.x2, bbox2d.y2];
+                    if (strcmp(labelObject.category, 'bus'))
+                        busBBox = [busBBox; bbox];  % 添加box（double数组增加一行）
+                    end
+                    if (strcmp(labelObject.category, 'car'))
+                        carBBox = [carBBox; bbox];
+                    end
+                    if (strcmp(labelObject.category, 'truck'))
+                        truckBBox = [truckBBox; bbox];
+                    end
+                end
+            end
+        end
+        if hasBox
+            addedRow = {valImageFilename, busBBox, carBBox, truckBBox};
+            testData = [testData; addedRow];
+        end
+    end
+end
 
 %%
 % The training data is stored in a table. The first column contains the
@@ -54,26 +152,26 @@ vehicleDataset = data.vehicleTrainingData;
 % vehicles. 
 
 % Display first few rows of the data set.
-vehicleDataset(1:4,:)
+% vehicleDataset(1:4,:)
 
 %%
 % Display one of the images from the data set to understand the type of
 % images it contains.
 
 % Add full path to the local vehicle data folder.
-dataDir = fullfile(toolboxdir('vision'),'visiondata');
-vehicleDataset.imageFilename = fullfile(dataDir, vehicleDataset.imageFilename);
+% dataDir = fullfile(toolboxdir('vision'),'visiondata');
+% vehicleDataset.imageFilename = fullfile(dataDir, vehicleDataset.imageFilename);
 
-% Read one of the images.
-I = imread(vehicleDataset.imageFilename{10});
-
-% Insert the ROI labels.
-I = insertShape(I, 'Rectangle', vehicleDataset.vehicle{10});
-
-% Resize and display image.
-I = imresize(I, 3);
-figure
-imshow(I)
+% % Read one of the images.
+% I = imread(vehicleDataset.imageFilename{10});
+% 
+% % Insert the ROI labels.
+% I = insertShape(I, 'Rectangle', vehicleDataset.vehicle{10});
+% 
+% % Resize and display image.
+% I = imresize(I, 3);
+% figure
+% imshow(I)
 
 %%
 % Split the data set into a training set for training the detector, and a
@@ -81,9 +179,9 @@ imshow(I)
 % training. Use the rest for evaluation.
 
 % Split data into a training and test set.
-idx = floor(0.6 * height(vehicleDataset));
-trainingData = vehicleDataset(1:idx,:);
-testData = vehicleDataset(idx:end,:);
+% idx = floor(0.6 * height(vehicleDataset));
+% trainingData = vehicleDataset(1:idx,:);
+% testData = vehicleDataset(idx:end,:);
 
 %% Create a Convolutional Neural Network (CNN)
 % A CNN is the basis of the Faster R-CNN object detector. Create the CNN
@@ -144,7 +242,7 @@ finalLayers = [
     % produce outputs that can be used to measure whether the input image
     % belongs to one of the object classes or to the background. This
     % measurement is made using the subsequent loss layers.
-    fullyConnectedLayer(width(vehicleDataset))
+    fullyConnectedLayer(width(trainingData))
 
     % Add the softmax loss layer and classification layer.
     softmaxLayer
@@ -243,7 +341,7 @@ options = [
 
 % A trained network is loaded from disk to save time when running the
 % example. Set this flag to true to train the network. 
-doTrainingAndEval = false;
+doTrainingAndEval = true;
 
 if doTrainingAndEval
     % Set random seed to ensure example training reproducibility.
@@ -270,9 +368,12 @@ I = imread(testData.imageFilename{1});
 [bboxes, scores] = detect(detector, I);
 
 % Annotate detections in the image.
-I = insertObjectAnnotation(I, 'rectangle', bboxes, scores);
-figure
-imshow(I)
+if ~isempty(bboxes)
+    I = insertObjectAnnotation(I, 'rectangle', bboxes, scores);
+    figure
+    imshow(I)
+end
+
 
 %% Evaluate Detector Using Test Set
 % Testing a single image showed promising results. To fully evaluate the
