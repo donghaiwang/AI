@@ -51,7 +51,7 @@ git clone https://github.com/donghaiwang/AI.git
 
 ## 测试
 
-（待添加）。
+（待添加）
 
 ### 分解为自动化测试
 
