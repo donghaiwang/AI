@@ -15,9 +15,9 @@ class THORDiscreteEnvironment(object):
 
   def __init__(self, config=dict()):
 
-    # configurations
+    # configurations(THOR离散环境的配置)
     self.scene_name          = config.get('scene_name', 'bedroom_04')
-    self.random_start        = config.get('random_start', True)
+    self.random_start        = config.get('random_start', True)  # 开始的位置随机
     self.n_feat_per_locaiton = config.get('n_feat_per_locaiton', 1) # 1 for no sampling
     self.terminal_state_id   = config.get('terminal_state_id', 0)
 
@@ -39,7 +39,7 @@ class THORDiscreteEnvironment(object):
     self.screen_height  = SCREEN_HEIGHT
     self.screen_width   = SCREEN_WIDTH
 
-    # we use pre-computed fc7 features from ResNet-50
+    # we use pre-computed fc7 features from ResNet-50（使用预训练ResNet-50的fc7层的特征
     # self.s_t = np.zeros([self.screen_height, self.screen_width, self.history_length])
     self.s_t      = np.zeros([2048, self.history_length])
     self.s_t1     = np.zeros_like(self.s_t)
@@ -50,17 +50,17 @@ class THORDiscreteEnvironment(object):
   # public methods
 
   def reset(self):
-    # randomize initial state
+    # randomize initial state 随机初始化状态
     while True:
       k = random.randrange(self.n_locations)
       min_d = np.inf
-      # check if target is reachable
+      # check if target is reachable 检查目标是否可达
       for t_state in self.terminal_states:
         dist = self.shortest_path_distances[k][t_state]
         min_d = min(min_d, dist)
       # min_d = 0  if k is a terminal state
       # min_d = -1 if no terminal state is reachable from k
-      if min_d > 0: break
+      if min_d > 0: break  # 目标可达
 
     # reset parameters
     self.current_state_id = k

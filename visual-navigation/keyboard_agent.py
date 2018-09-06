@@ -12,16 +12,16 @@ from utils.tools import SimpleImageViewer
 
 #
 # Navigate the scene using your keyboard
-#
+# 使用键盘进行场景浏览
 
 def key_press(key, mod):
 
-  global human_agent_action, human_wants_restart, stop_requested
-  if key == ord('R') or key == ord('r'): # r/R
+  global human_agent_action, human_wants_restart, stop_requested  # 为一个定义在函数外的变量赋值
+  if key == ord('R') or key == ord('r'): # r/R  重新开始浏览场景(ord返回 ASCII 数值，或者 Unicode 数值)
     human_wants_restart = True
   if key == ord('Q') or key == ord('q'): # q/Q
     stop_requested = True
-  if key == 0xFF52: # up
+  if key == 0xFF52: # up(OSG中支持的键盘码值)
     human_agent_action = 0
   if key == 0xFF53: # right
     human_agent_action = 1
@@ -36,7 +36,7 @@ def rollout(env):
   human_agent_action = None
   human_wants_restart = False
   while True:
-    # waiting for keyboard input
+    # waiting for keyboard input 等待键盘输入
     if human_agent_action is not None:
       # move actions
       env.step(human_agent_action)
@@ -66,7 +66,7 @@ if __name__ == '__main__':
   args = parser.parse_args()
 
   print("Loading scene dump {}".format(args.scene_dump))
-  env = THORDiscreteEnvironment({
+  env = THORDiscreteEnvironment({  # THOR离散环境
     'h5_file_path': args.scene_dump
   })
 

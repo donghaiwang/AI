@@ -115,7 +115,7 @@ class ActorCriticNetwork(object):
   def _get_key(self, scopes):
     return '/'.join(scopes)
 
-# Actor-Critic Feed-Forward Network
+# Actor-Critic Feed-Forward Network(AC前馈网络)
 class ActorCriticFFNetwork(ActorCriticNetwork):
   """
     Implementation of the target-driven deep siamese actor-critic network from [Zhu et al., ICRA 2017]
