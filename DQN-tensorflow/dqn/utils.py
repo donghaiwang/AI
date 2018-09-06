@@ -13,7 +13,7 @@ except:
   import cv2
   imresize = cv2.resize
 
-def rgb2gray(image):
+def rgb2gray(image):  # 彩图转RGB图
   return np.dot(image[...,:3], [0.299, 0.587, 0.114])
 
 def timeit(f):
