@@ -15,25 +15,19 @@ shortestPathDistance = h5read(h5FilePath, '/shortest_path_distance');  % 408x408
 
 fig = figure;
 global currentStateID;
-% currentStateID = round(rand*stateNum);
-currentStateID = 113;
+currentStateID = round(rand*stateNum);  % 随机初始化一个位置作为起始位置
+% currentStateID = 113;
 randImg = observation(:,:,:, currentStateID);
 randImg = permute(randImg, [3, 2, 1]);
 imshow(randImg);
 
 set(fig, 'KeyPressFcn', @keypress)  % 绑定显示图形的工具的时间处理（方向箭头）
 
-% for i = 1 : stateNum
-%     currentImg = observation(:,:,:,i);
-%     currentImg = permute(currentImg, [3, 2, 1]);
-%     imshow(currentImg);
-%     pause(1);
-% end
-
 function keypress(~, evnt)
     global currentStateID;
     global observation;
     global transitionGraph;
+%     disp(evnt.Key);
     switch lower(evnt.Key) % 2314 (3124)
         case 'rightarrow'
             action = 2;
@@ -43,6 +37,8 @@ function keypress(~, evnt)
             action = 1;  % 2前进
         case 'downarrow'
             action = 4;
+        case 'q'
+            close(gcf); return;
         otherwise
             return
     end
