@@ -38,7 +38,7 @@ function keypress(~, evnt)
         case 'downarrow'
             action = 4;
         case 'q'
-            close(gcf); return;
+            close(gcf); return;  % 释放当前窗口
         otherwise
             return
     end
