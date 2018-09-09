@@ -65,10 +65,10 @@ if __name__ == '__main__':
                                   momentum=0.0,
                                   epsilon=RMSP_EPSILON,
                                   clip_norm=GRAD_NORM_CLIP,
-                                  device=device)
+                                  device=device)  # RMSP优化算法
 
-    # instantiate each training thread
-    # each thread is training for one target in one scene
+    # instantiate each training thread 每个线程实例
+    # each thread is training for one target in one scene 每个线程训练一个场景中的一个目标
     training_threads = []
     for i in range(PARALLEL_SIZE):
         scene, task = branches[i % NUM_TASKS]
@@ -79,7 +79,7 @@ if __name__ == '__main__':
                                             network_scope="thread-%d" % (i + 1),
                                             scene_scope=scene,
                                             task_scope=task)
-        training_threads.append(training_thread)
+        training_threads.append(training_thread)  # 将新建的训练线程添加到队列中
 
     # prepare session
     sess = tf.Session(config=tf.ConfigProto(log_device_placement=False,
@@ -166,14 +166,14 @@ if __name__ == '__main__':
 
     signal.signal(signal.SIGINT, signal_handler)
 
-    # start each training thread
+    # 开始每一个训练线程 start each training thread
     for t in train_threads:
         t.start()
 
     print('Press Ctrl+C to stop.')
     signal.pause()
 
-    # wait for all threads to finish
+    # 等待所有训练线程结束 wait for all threads to finish
     for t in train_threads:
         t.join()
 
