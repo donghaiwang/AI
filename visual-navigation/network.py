@@ -151,8 +151,8 @@ class ActorCriticFFNetwork(ActorCriticNetwork):
       # state (input) 机器人观测到到的图片的特征
       self.s = tf.placeholder("float", [None, 2048, 4])  # 从ResNet-50产生2048维特征
 
-      # target (input) 输入目标
       self.t = tf.placeholder("float", [None, 2048, 4])
+      # target (input) 输入目标
 
       with tf.variable_scope(network_scope):
         # network key
