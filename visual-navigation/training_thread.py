@@ -209,7 +209,7 @@ class A3CTrainingThread(object):
         batch_R = []
         batch_t = []
 
-        # compute and accmulate gradients
+        # 计算并累积梯度 compute and accmulate gradients
         for (ai, ri, si, Vi, ti) in zip(actions, rewards, states, values, targets):
             R = ri + GAMMA * R
             td = R - Vi

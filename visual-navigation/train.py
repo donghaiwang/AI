@@ -78,7 +78,7 @@ if __name__ == '__main__':
                                             device=device,
                                             network_scope="thread-%d" % (i + 1),
                                             scene_scope=scene,
-                                            task_scope=task)
+                                            task_scope=task)  # 各个线程都是训练同一个网络
         training_threads.append(training_thread)  # 将新建的训练线程添加到队列中
 
     # prepare session

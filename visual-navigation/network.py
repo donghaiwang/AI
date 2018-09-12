@@ -15,34 +15,34 @@ class ActorCriticNetwork(object):
 
     def prepare_loss(self, entropy_beta, scopes):
         # drop task id (last element) as all tasks in
-        # the same scene share the same output branch
+        # the same scene share the same output branch 降序排列任务ID（所有的任务在相同的场景共享相同的输出分支
         scope_key = self._get_key(scopes[:-1])
 
         with tf.device(self._device):
-            # taken action (input for policy)
+            # 采取动作 taken action (input for policy)
             self.a = tf.placeholder("float", [None, self._action_size])
 
-            # temporary difference (R-V) (input for policy)
+            # 时间差分 temporary difference (R-V) (input for policy)
             self.td = tf.placeholder("float", [None])
 
-            # avoid NaN with clipping when value in pi becomes zero
+            # 避免由于裁剪出现NaN avoid NaN with clipping when value in pi becomes zero
             log_pi = tf.log(tf.clip_by_value(self.pi[scope_key], 1e-20, 1.0))
 
-            # policy entropy
+            # 策略熵 policy entropy
             entropy = -tf.reduce_sum(self.pi[scope_key] * log_pi, axis=1)
 
-            # policy loss (output)
+            # 输出策略损失 policy loss (output)
             policy_loss = - tf.reduce_sum(
                 tf.reduce_sum(tf.multiply(log_pi, self.a), axis=1) * self.td + entropy * entropy_beta)
 
-            # R (input for value)
+            # 输入值得奖励 R (input for value)
             self.r = tf.placeholder("float", [None])
 
-            # value loss (output)
-            # learning rate for critic is half of actor's
+            # 输出值损失 value loss (output)
+            # 评价者的学习率是动作者的一半 learning rate for critic is half of actor's
             value_loss = 0.5 * tf.nn.l2_loss(self.r - self.v[scope_key])
 
-            # gradienet of policy and value are summed up
+            # 将策略和值得梯度进行累加 gradienet of policy and value are summed up
             self.total_loss = policy_loss + value_loss
 
     def run_policy_and_value(self, sess, s_t, task):
@@ -57,7 +57,7 @@ class ActorCriticNetwork(object):
     def get_vars(self):
         raise NotImplementedError()
 
-    def sync_from(self, src_netowrk, name=None):
+    def sync_from(self, src_netowrk, name=None):  # 与全局网络进行同步
         src_vars = src_netowrk.get_vars()
         dst_vars = self.get_vars()
 
