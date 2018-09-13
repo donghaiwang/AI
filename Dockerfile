@@ -2,7 +2,7 @@
 FROM caffe2/caffe2:snapshot-py2-cuda9.0-cudnn7-ubuntu16.04
 
 RUN mv /usr/local/caffe2 /usr/local/caffe2_build        # 将caffe2文件夹重命名为caffe2_build
-ENV Caffe2_DIR /usr/local/caffe2_build
+ENV Caffe2_DIR /usr/local/caffe2_build                  # 定义镜像的环境变量
 
 ENV PYTHONPATH /usr/local/caffe2_build:${PYTHONPATH}
 ENV LD_LIBRARY_PATH /usr/local/caffe2_build/lib:${LD_LIBRARY_PATH}
