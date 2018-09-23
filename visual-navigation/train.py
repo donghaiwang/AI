@@ -93,7 +93,7 @@ if __name__ == '__main__':
     summary_placeholders = dict()
 
     for i in range(PARALLEL_SIZE):
-        scene, task = branches[i % NUM_TASKS]
+        scene, task = branches[i % NUM_TASKS]  # 每个任务可能对应多个处理进程
         key = scene + "-" + task
 
         # summary for tensorboard
@@ -117,11 +117,11 @@ if __name__ == '__main__':
 
     summary_writer = tf.summary.FileWriter(LOG_FILE, sess.graph)
 
-    # init or load checkpoint with saver
-    # if you don't need to be able to resume training, use the next line instead.
-    # it will result in a much smaller checkpoint file.
+    # 使用saver进行初始化或者加载检查点 init or load checkpoint with saver
+    # 如果不需要从中断的位置继续开始训练，可以使用下一行 if you don't need to be able to resume training, use the next line instead.
+    # 不需要从中断的位置继续训练能使检查点文件更小 it will result in a much smaller checkpoint file.
     # saver = tf.train.Saver(max_to_keep=10, var_list=global_network.get_vars())
-    saver = tf.train.Saver(max_to_keep=10)
+    saver = tf.train.Saver(max_to_keep=10)  # 保存最近的10个模型
 
     checkpoint = tf.train.get_checkpoint_state(CHECKPOINT_DIR)
     if checkpoint and checkpoint.model_checkpoint_path:
@@ -135,7 +135,7 @@ if __name__ == '__main__':
         print("Could not find old checkpoint")
 
 
-    def train_function(parallel_index):
+    def train_function(parallel_index):  # 训练的具体内容
         global global_t
         training_thread = training_threads[parallel_index]
         last_global_t = 0
@@ -162,7 +162,7 @@ if __name__ == '__main__':
 
     train_threads = []
     for i in range(PARALLEL_SIZE):
-        train_threads.append(threading.Thread(target=train_function, args=(i,)))
+        train_threads.append(threading.Thread(target=train_function, args=(i,)))  # 新建每一个训练线程
 
     signal.signal(signal.SIGINT, signal_handler)
 
