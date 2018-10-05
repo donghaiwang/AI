@@ -34,8 +34,8 @@ for episode = 1:MAX_EPISODES
             QTarget = reward;
             isTerminated = true;    % 结束当前回合
         end
-        Q_table{curState, choosedAction} = Q_table{curState, choosedAction} + ALPHA * (QTarget - QPredict);  % 更新Q表
-        curState = nextState;
+        Q_table{curState, choosedAction} = Q_table{curState, choosedAction} + ALPHA * (QTarget - QPredict);  % 更新Q表（进行学习）
+        curState = nextState;   % 把下一个状态变为下一步的当前状态
         
         updateEnv(curState, episode, stepCounter+1);
         stepCounter = stepCounter+1;
