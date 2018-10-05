@@ -34,7 +34,7 @@ for episode = 1:MAX_EPISODES
             QTarget = reward;
             isTerminated = true;    % 结束当前回合
         end
-        Q_table{curState, choosedAction} = Q_table{curState, choosedAction} + ALPHA * (QTarget - QPredict);
+        Q_table{curState, choosedAction} = Q_table{curState, choosedAction} + ALPHA * (QTarget - QPredict);  % 更新Q表
         curState = nextState;
         
         updateEnv(curState, episode, stepCounter+1);
@@ -75,7 +75,6 @@ function updateEnv(curState, episode, stepCounter)
         info = sprintf('Episode %d, total steps = %d', episode, stepCounter); 
         fprintf('%s\n', info);
         pause(2);
-%         disp('end...');
     else
         envList(curState) = 'o';
         disp(envList);
@@ -95,7 +94,7 @@ function actionName = chooseAction(qTable, state)
         else
             actionName = 'RIGHT_ACTION';
         end
-    else    % 采取贪婪策略
+    else    % 90%的可能采取贪婪策略
         if stateActions{1, 'LEFT_ACTION'} >= stateActions{1, 'RIGHT_ACTION'}
             actionName = 'LEFT_ACTION';
         else
