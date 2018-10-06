@@ -67,6 +67,7 @@ classdef MazeEnv
         
         % 构建网格环境
         function buildMazeEnv(obj)
+            obj.gridColor = MazeEnv.initGridColor;
             figure('menubar','none');   % 隐藏菜单栏和工具栏
             axis off    % 隐藏坐标轴
             set(gca,'ydir','reverse','xaxislocation','top');    % 将坐标原点调整到左上角
@@ -95,40 +96,51 @@ classdef MazeEnv
         end
         
         % 将网格重置为初始状态
-        function reset(obj)
+        function obj = reset(obj)
             obj.gridColor = MazeEnv.initGridColor;
             obj.render();
         end
         
         % 智能体采取行动，下1，右2，左3，左4（注意：内存中起点为左上角，x轴向下，y轴向右）
-        function step(obj, action)
+        function obj = step(obj, action)    % 类中方法修改成员变量需要将修改obj返回，并且在调用的时候用目前的指针覆盖原来的指针maze = maze.step(1)
             colorMap = obj.gridColor;
+            nextStatus = 0;     % 当前位置不采取行动
             [x, y] = find(obj.gridColor == 2);
             switch action
                 case 1                      % 下
                     if y < obj.width        % 等于4再向上走就会超出网格区域，不采取动作
                         colorMap(x, y) = 1;       % 原来的位置设置为白色1
+                        nextStatus = colorMap(x, y+1);  % 记住下一个状态，用于最后判断是否结束
                         colorMap(x, y+1) = 2;     % 移动后的位置设置为红色
                     end
                 case 2                      % 右
                     if x < obj.height
                         colorMap(x, y) = 1;
+                        nextStatus = colorMap(x+1, y);
                         colorMap(x+1, y) = 2;
                     end
                 case 3                      % 左
                     if y > 1
                         colorMap(x, y) = 1;
+                        nextStatus = colorMap(x, y-1);
                         colorMap(x, y-1) = 2;
                     end
                 case 4                      %　上
                     if x > 1
                         colorMap(x, y) = 1;
+                        nextStatus = colorMap(x-1, y);
                         colorMap(x-1, y) = 2;
                     end
             end
             obj.gridColor = colorMap;
             obj.render();
-            pause(1);
+            if nextStatus == 3 || nextStatus == 4   % 智能体掉入坑里(3)或者找到目标(4)
+                obj.render();
+                pause(1);
+                obj = obj.reset();
+                pause(1);
+            end
+            pause(0.1);
         end
         
     end
