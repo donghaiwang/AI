@@ -10,14 +10,19 @@
 
 classdef MazeEnv
     properties
-        gridColor = [2,1,1,1; 1,1,4,1; 1,4,3,1; 1,1,1,1];    % 坐标网格的颜色映射：1，白色（空白）；2，红色（智能体）；3，,黄色（终点），4，黑色（陷阱）
+        gridColor = MazeEnv.initGridColor;    % 坐标网格的颜色映射：1，白色（空白）；2，红色（智能体）；3，,黄色（终点），4，黑色（陷阱）
     end
     
     % Dependent属性不存数据（依赖于其他非Dependent属性），必须定义get.PropertyName方法
     % 仅在需要时确定属性的值, 并避免存储该值（如账户的从属属性余额）
+%     properties (Dependent)
+%         AgentPosition;      % 智能体当前的位置
+%     end
+    
     properties (Constant)
         height = 4;     % 网格的高度
         width = 4;      % 宽度
+        initGridColor = [2,1,1,1; 1,1,4,1; 1,4,3,1; 1,1,1,1];
         
         Increment = 1;  % 运行的程序数目+1
         Decrement = 0;
@@ -43,6 +48,10 @@ classdef MazeEnv
     end
     
     methods
+%         function [x, y] = get.AgentPosition(obj)
+%             [x, y] = find(obj.gridColor == 2);
+%         end
+        
         function obj = MazeEnv()
             startApp(obj);
         end
@@ -56,9 +65,16 @@ classdef MazeEnv
             munlock;
         end
         
+        % 构建网格环境
         function buildMazeEnv(obj)
             figure('menubar','none');   % 隐藏菜单栏和工具栏
             axis off    % 隐藏坐标轴
+            set(gca,'ydir','reverse','xaxislocation','top');    % 将坐标原点调整到左上角
+            obj.render();
+        end
+        
+        % 根据当前网格颜色进行实时刷新
+        function render(obj)
             for h = 1 : obj.height
                 for w = 1 : obj.width
                     r = rectangle('Position', [h w 1 1]);
@@ -67,8 +83,8 @@ classdef MazeEnv
                             r.FaceColor = 'white';    % 正方体填充的颜色
                         case 2
                             r.FaceColor = 'red';        % 智能体的颜色
-                            r.EdgeColor = 'magenta';    % 智能体边框颜色为品红
-                            r.LineWidth = 3;            % 智能体边框的宽度
+%                             r.EdgeColor = 'magenta';    % 智能体边框颜色为品红
+%                             r.LineWidth = 3;            % 智能体边框的宽度
                         case 3
                             r.FaceColor = 'yellow';
                         case 4
@@ -77,34 +93,45 @@ classdef MazeEnv
                 end
             end
         end
+        
+        % 将网格重置为初始状态
+        function reset(obj)
+            obj.gridColor = MazeEnv.initGridColor;
+            obj.render();
+        end
+        
+        % 智能体采取行动，下1，右2，左3，左4（注意：内存中起点为左上角，x轴向下，y轴向右）
+        function step(obj, action)
+            colorMap = obj.gridColor;
+            [x, y] = find(obj.gridColor == 2);
+            switch action
+                case 1                      % 下
+                    if y < obj.width        % 等于4再向上走就会超出网格区域，不采取动作
+                        colorMap(x, y) = 1;       % 原来的位置设置为白色1
+                        colorMap(x, y+1) = 2;     % 移动后的位置设置为红色
+                    end
+                case 2                      % 右
+                    if x < obj.height
+                        colorMap(x, y) = 1;
+                        colorMap(x+1, y) = 2;
+                    end
+                case 3                      % 左
+                    if y > 1
+                        colorMap(x, y) = 1;
+                        colorMap(x, y-1) = 2;
+                    end
+                case 4                      %　上
+                    if x > 1
+                        colorMap(x, y) = 1;
+                        colorMap(x-1, y) = 2;
+                    end
+            end
+            obj.gridColor = colorMap;
+            obj.render();
+            pause(1);
+        end
+        
     end
     
     
 end
-
-
-% h=256;
-% w=256;
-% n=8;
-% img=zeros(h,w);
-%
-% flag=1;
-% for y=1:h
-%     for x=1:w
-%         if flag>0
-%             img(y,x)=255;
-%         end
-%         if mod(x,int8(w/n))==0
-%             flag=-flag;
-%         end
-%     end
-%     if mod(y,int8(h/n))==0
-%         flag=-flag;
-%     end
-% end
-% imshow(img)
-%
-% %系统调用
-% img=checkerboard(32)>0.5;
-% figure;
-% imshow(img,[])
