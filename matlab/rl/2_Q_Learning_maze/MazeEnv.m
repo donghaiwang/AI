@@ -141,9 +141,6 @@ classdef MazeEnv
                 pause(1);
             end
             pause(0.1);
-        end
-        
+        end 
     end
-    
-    
 end

@@ -3,12 +3,10 @@ maze = MazeEnv();
 % maze.reset();
 % maze.gridColor = [1,1,1,1; 1,1,4,1; 1,4,3,1; 2,1,1,1];
 % maze = maze.step(1); % об
-% maze = maze.step(1);
-% maze = maze.step(1);
 % maze.step(2);   % ср
 % maze.step(3);   % вС
 % maze.step(4);   % ио
-% 
+
 for episode = 1 : 1000000000
     action = ceil(rand()*4);
     maze = maze.step(action);
