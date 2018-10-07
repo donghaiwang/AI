@@ -96,13 +96,14 @@ classdef MazeEnv
         end
         
         % 将网格重置为初始状态
-        function obj = reset(obj)
+        function [obj, observation] = reset(obj)
             obj.gridColor = MazeEnv.initGridColor;
             obj.render();
+            observation = (1-1)*obj.width + 1;     %　返回(1,1)位置在Q表中的行下标
         end
         
         % 智能体采取行动，下1，右2，左3，左4（注意：内存中起点为左上角，x轴向下，y轴向右）
-        function obj = step(obj, action)    % 类中方法修改成员变量需要将修改obj返回，并且在调用的时候用目前的指针覆盖原来的指针maze = maze.step(1)
+        function [obj, observation, reward, done] = step(obj, action)    % 类中方法修改成员变量需要将修改obj返回，并且在调用的时候用目前的指针覆盖原来的指针maze = maze.step(1)
             colorMap = obj.gridColor;
             nextStatus = 0;     % 当前位置不采取行动
             [x, y] = find(obj.gridColor == 2);
@@ -112,35 +113,52 @@ classdef MazeEnv
                         colorMap(x, y) = 1;       % 原来的位置设置为白色1
                         nextStatus = colorMap(x, y+1);  % 记住下一个状态，用于最后判断是否结束
                         colorMap(x, y+1) = 2;     % 移动后的位置设置为红色
+                        observation = (x-1)*obj.width + (y+1);            % 下一步的位置（在Q表中行下标）
                     end
                 case 2                      % 右
                     if x < obj.height
                         colorMap(x, y) = 1;
                         nextStatus = colorMap(x+1, y);
                         colorMap(x+1, y) = 2;
+                        observation = (x+1-1)*obj.width + (y);
                     end
                 case 3                      % 左
                     if y > 1
                         colorMap(x, y) = 1;
                         nextStatus = colorMap(x, y-1);
                         colorMap(x, y-1) = 2;
+                        observation = (x-1)*obj.width + (y-1);
                     end
                 case 4                      %　上
                     if x > 1
                         colorMap(x, y) = 1;
                         nextStatus = colorMap(x-1, y);
                         colorMap(x-1, y) = 2;
+                        observation = (x-1-1)*4 + (y);
                     end
+            end
+            if ~exist('observation')        % 处理不移动的情况（不能出界）
+                observation = (x-1)*obj.width + y;
             end
             obj.gridColor = colorMap;
             obj.render();
-            if nextStatus == 3 || nextStatus == 4   % 智能体掉入坑里(3)或者找到目标(4)
+            if nextStatus == 3 || nextStatus == 4   % 智能体掉入坑里(4)或者找到目标(3)
+                if nextStatus == 4
+                    reward = -1;
+                    done = 2;        % 当前回合结束标志
+                elseif nextStatus == 3
+                    reward = 1;
+                    done = 1;
+                end
                 obj.render();
-                pause(1);
-                obj = obj.reset();
-                pause(1);
+                pause(0.5);
+%                 obj = obj.reset();
+%                 pause(1);
+            else
+                done = 0;
+                reward = 0;
             end
-            pause(0.1);
+            pause(0.5);
         end 
     end
 end
