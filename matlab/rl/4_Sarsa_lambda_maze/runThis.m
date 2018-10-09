@@ -1,7 +1,7 @@
 
-%% 进行Sarsa学习，还收敛不了内存就爆了，原因还在找
+%% 进行Sarsa Lambda学习
 maze = MazeEnv();
-RL = SarsaTable(1, 0.1, 0.01, 0.9);
+RL = SarsaLambdaTable(1, 0.1, 0.01, 0.9, 0.9);
 for episode = 1:300
     [~, observation] = maze.reset();    % 回到起点
     stepNum = 0;        % 统计到终点所用的步数
@@ -12,7 +12,7 @@ for episode = 1:300
         maze.render();   % 刷新环境显示
         [maze, nextObservation, reward, done] = maze.step(action);      % 走完之后再次选择行动，为了学习这次选择的行动
         nextAction = RL.chooseAction(observation);
-        % 学习
+        % 学习p
         RL = RL.learn(observation, action, reward, nextObservation, nextAction);
         
         observation = nextObservation;
