@@ -26,7 +26,7 @@ total_steps = 0;
 for i_episode = 1:100
     observation = double(env.reset());  % ndarray -> double array
     while true
-        env.render();
+        env.render();                   % 出现显示的窗口关不掉，运行：clear classes 或者 clear all
         
         action = int32(RL.chooseAction(observation)); 
         action = int32(action-1);      % python的下标是从0开始，动作1,2对应到python中是0,1
