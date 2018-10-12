@@ -55,15 +55,9 @@ classdef DeepQNetwork
         % 参考mxnet实现 https://www.cnblogs.com/YiXiaoZhou/p/8145499.html
         function buildNet(obj)
             % 建构估值网络，输入featuresNum个
-            evalNet = [ ...
-                fullyConnectedLayer(16)
-                reluLayer
-                fullyConnectedLayer(32)
-                reluLayer
-                fullyConnectedLayer(16)
-                reluLayer
-                fullyConnectedLayer(obj.actionNum)
-                ];
+            evalNet = Net();
+            targetNet = Net();
+%             analyzeNetwork(evalNet.layers);     % 分析网络结构是否合理
             % 损失为Q估计和Q目标差的平方，RMSProp优化器，最小化损失
         end
         
