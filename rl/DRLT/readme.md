@@ -2,6 +2,7 @@
 
 [Deep Reinforcement Learning For Visual Objective Tracking](https://arxiv.org/pdf/1701.08936.pdf)
 
+[项目的地址](https://github.com/donghaiwang/VisualTracking_DRL)
 
 出现不能从DVD中进行安装，需要回退到install文件的上一级运行，比如：./matlab_install/install
 mkdir matlab
