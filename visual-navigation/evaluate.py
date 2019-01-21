@@ -45,22 +45,22 @@ if __name__ == '__main__':
         print("Could not find old checkpoint")
 
     scene_stats = dict()
-    for scene_scope in scene_scopes:
+    for scene_scope in scene_scopes:  # 测试4个场景：浴室、卧室、厨房、客厅
 
         scene_stats[scene_scope] = []
-        for task_scope in list_of_tasks[scene_scope]:
+        for task_scope in list_of_tasks[scene_scope]:  # 每个场景都有一些列导航目标
 
             env = Environment({
                 'scene_name': scene_scope,
                 'terminal_state_id': int(task_scope)
-            })
+            })  # 场景+导航目标=不同的测试环境
             ep_rewards = []
             ep_lengths = []
             ep_collisions = []
 
             scopes = [network_scope, scene_scope, task_scope]
 
-            for i_episode in range(NUM_EVAL_EPISODES):
+            for i_episode in range(NUM_EVAL_EPISODES):  # 测试100条轨迹，计算平均轨迹长度
 
                 env.reset()
                 terminal = False
@@ -68,15 +68,15 @@ if __name__ == '__main__':
                 ep_collision = 0
                 ep_t = 0
 
-                while not terminal:
+                while not terminal:  # 一条轨迹没结束就一直走下去
 
                     pi_values = global_network.run_policy(sess, env.s_t, env.target, scopes)
                     action = sample_action(pi_values)
                     env.step(action)
                     env.update()
 
-                    terminal = env.terminal
-                    if ep_t == 10000: break
+                    terminal = env.terminal  # 环境的结束ID就是该环境的目标ID（场景+目标ID）
+                    if ep_t == 10000: break  # 走10k步还走不到目标就结束
                     if env.collided: ep_collision += 1
                     ep_reward += env.reward
                     ep_t += 1
