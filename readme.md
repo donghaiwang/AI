@@ -11,7 +11,7 @@
 开发测试平台Windows 10、Ubuntu 14.04
 
 ```
-Matlab 2018a（-^^-迈特莱布-^^-）
+Matlab 2018a
 Python 3.6
 ```
 
