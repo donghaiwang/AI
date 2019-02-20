@@ -1,0 +1,1 @@
+num2hex([-1 0 0.1 -pi inf nan])
