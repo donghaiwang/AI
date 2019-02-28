@@ -27,3 +27,8 @@ else
     disp('Note project exists');
 end
 
+%%
+customPath = fullfile(fileparts(fileparts( mfilename('fullpath') )), 'custom');
+eval(['cd ' customPath]);
+addpath(customPath);
+savepath;

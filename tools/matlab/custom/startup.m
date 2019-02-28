@@ -8,11 +8,12 @@ else
 end
 
 currentPath = fileparts(mfilename('fullpath'));
-addpath(fullfile(currentPath, 'customCommand'));
+addpath(currentPath);
+% addpath(fullfile(currentPath, 'customCommand'));
 
 %% 
-addpath('D:\software\matlab_third\dl');
-cd D:\workspace\tracking\DeepCC
+% addpath('D:\software\matlab_third\dl');
+% cd D:\workspace\tracking\DeepCC
 
 %% temporary operation
 % cd D:\workspace\data\MOT\devkit\utils
