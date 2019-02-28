@@ -12,10 +12,18 @@ end
 
 eval(['cd ' workspaceDir])
 
-AIProgramDir = fullfile(workspaceDir, 'AI');
-if ~exist(AIProgramDir, 'dir')
+AI_projectDir = fullfile(workspaceDir, 'AI');
+if ~exist(AI_projectDir, 'dir')
     !git clone https://github.com/donghaiwang/AI
 else
-    disp('AI Program exist');
+    disp('AI project exists');
+end
+
+%% Clone note project
+noteProjectDir = fullfile(workspaceDir, 'donghaiwang');
+if ~exist(noteProjectDir, 'dir')
+    !git clone https://github.com/donghaiwang/donghaiwang.git
+else
+    disp('Note project exists');
 end
 
