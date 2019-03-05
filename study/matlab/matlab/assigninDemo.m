@@ -7,6 +7,23 @@ fcnStatus;
 updateAge(37);
 
 %%
+
+m = minRand(2)
+
+%%
+% function m = minRand(n)
+%     assignfh
+%     
+%     A = fh(n);
+%     m = min(A(:));
+% end
+% 
+% function assignfh
+%     fh = @(dim)rand(dim);
+%     assignin('caller', 'fh', fh);
+% end
+
+%%
 function mydialog
     prompt = {'Enter name:', 'Enter birth year:'};
     answer = inputdlg(prompt);

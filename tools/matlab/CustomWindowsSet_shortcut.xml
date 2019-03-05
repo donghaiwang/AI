@@ -17,6 +17,9 @@
          <Stroke alt="on" code="VK_S" shift="on"/>
          <Stroke code="VK_S" meta="on" shift="on"/>
       </Action>
+      <Action id="publish-to-default-format">
+         <Stroke code="VK_P" ctrl="on" shift="on"/>
+      </Action>
       <Action id="goto-line">
          <Stroke code="VK_L" ctrl="on"/>
       </Action>
