@@ -65,7 +65,9 @@ maxScores = scores(classIds);
 labels = classes(classIds);
 
 %% Visualize results
+subplot(1, 2, 1);
 imshow(im);
+subplot(1, 2, 2);
 CAMshow(im, classActivationMap);
 title(string(labels) + "," + string(maxScores));
 drawnow;
