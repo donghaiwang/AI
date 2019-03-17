@@ -1,4 +1,0 @@
-Md1 = arima(2, 1, 2);
-
-%%
-Md1 = arima('Constant', 0.05, 'AR',
