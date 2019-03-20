@@ -50,19 +50,30 @@ replace(slide, 'Content', { ...
 	'Multi-Target, Multi-Camera Tracking using Hierarchy Deep Reinforcement Learning'});
 
 
-%% 1.2 Add the third slide to the presentation based on Title and Content layout.
+%% 1.2 Dataset
 slide = add(pre, 'Title and Content');
-replace(slide, 'Title', 'Duke University');
+replace(slide, 'Title', 'The Dataset for Multi-Target, Multi-Camera Tracking');
 
-% Replace the Content placeholder by the plot
-mapLargeImg = fullfile(imgPath, 'map_large.png');
-replace(slide, 'Content', Picture(mapLargeImg));
+% mapLargeImg = fullfile(imgPath, '1_0_map_large.png');
+% replace(slide, 'Content', Picture(mapLargeImg));
+sampleVideo = fullfile(imgPath, 'video_samples.mp4');
+p = Paragraph('This is a link to the sample video');
+link = ExternalLink(sampleVideo,' Duke University');
+append(p,link);
+replace(slide, 'Content', p);
 
-% Add plot image to the list of images to be deleted at the end of
-% presentation generation. Note that you need to keep the images around until
-% the presentation is closed. That is because you cannot add images to the
-% presentation package while the presentation file is still open.
-% images = [images {img}]; %#ok<*NASGU>
+%% 1.3 Multi-Target Multi-Camera Tracking and Re-Identification
+slide = add(pre, 'Comparison');
+replace(slide, 'Title', 'Multi-Target Multi-Camera Tracking and Re-Identification');
+
+replace(slide, 'Left Text', 'Tracking Results');
+leftImg = fullfile(imgPath, '1_1_example.bmp');
+replace(slide, 'Left Content', Picture(leftImg));
+
+replace(slide, 'Right Text', 'Tracking Pipeline');
+rightImg = fullfile(imgPath, '1_2_stream.PNG');
+replace(slide, 'Right Content', Picture(rightImg));
+
 
 %% 2.1 Add the fourth slide to the presentation based on Comparison layout.
 slide = add(pre, 'Comparison');
@@ -83,13 +94,19 @@ replace(slide, 'Title', 'Multi-Object Tracking Using Collaborative Deep Reinforc
 
 cdrlImg = fullfile(imgPath, '3_1_CDRL.PNG');
 replace(slide, 'Content', Picture(cdrlImg));
-% images = [images {img}]; %#ok<*NASGU>
 
 %% 4.1 RiID
 slide = add(pre, 'Title and Content');
 replace(slide, 'Title', 'Multi-shot Pedestrian Re-identification using Deep Reinforcement Learning');
 
 cdrlImg = fullfile(imgPath, '4_1_reid.PNG');
+replace(slide, 'Content', Picture(cdrlImg));
+
+%% 5.1 drlcc
+slide = add(pre, 'Title and Content');
+replace(slide, 'Title', 'Multi-Target, Multi-Camera Tracking using Hierarchy Deep Reinforcement Learning');
+
+cdrlImg = fullfile(imgPath, '5_drlcc.png');
 replace(slide, 'Content', Picture(cdrlImg));
 
 
