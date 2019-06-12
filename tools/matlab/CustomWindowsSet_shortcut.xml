@@ -43,6 +43,9 @@
          <Stroke alt="on" code="VK_C" shift="on"/>
          <Stroke code="VK_C" meta="on" shift="on"/>
       </Action>
+      <Action id="exit-debug">
+         <Stroke code="VK_F4"/>
+      </Action>
       <Action id="open-with-system-browser">
          <Stroke alt="on" code="VK_E" shift="on"/>
          <Stroke code="VK_E" meta="on" shift="on"/>
