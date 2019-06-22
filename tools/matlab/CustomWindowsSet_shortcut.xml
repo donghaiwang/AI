@@ -65,6 +65,10 @@
          <Stroke code="VK_T" ctrl="on"/>
          <Stroke code="VK_COMMA" ctrl="on"/>
       </Action>
+      <Action id="debug-continue">
+         <Stroke code="VK_F5"/>
+         <Stroke code="VK_F7"/>
+      </Action>
       <Action id="kill-line">
          <Stroke code="VK_K" ctrl="on"/>
       </Action>
@@ -75,8 +79,42 @@
    </Context>
    <Context id="CommandWindow">
       <Action id="kill-line"/>
+      <Action id="open-selection">
+         <Stroke code="VK_F3"/>
+      </Action>
    </Context>
    <Context id="Explorer">
       <Action id="jump-list-prev"/>
+      <Action follows="None" id="open-selection">
+         <Stroke code="VK_ENTER"/>
+         <Stroke code="VK_D" ctrl="on"/>
+         <Stroke code="VK_F3"/>
+      </Action>
+   </Context>
+   <Context id="VariableEditor">
+      <Action id="open-selection">
+         <Stroke code="VK_F3"/>
+      </Action>
+   </Context>
+   <Context id="Project">
+      <Action id="open-selection">
+         <Stroke code="VK_ENTER"/>
+         <Stroke code="VK_F3"/>
+      </Action>
+   </Context>
+   <Context id="HTMLRenderer">
+      <Action id="open-selection">
+         <Stroke code="VK_F3"/>
+      </Action>
+   </Context>
+   <Context id="MATLABEditor">
+      <Action id="open-selection">
+         <Stroke code="VK_F3"/>
+      </Action>
+   </Context>
+   <Context id="Recordlist">
+      <Action id="open-selection">
+         <Stroke code="VK_F3"/>
+      </Action>
    </Context>
 </CustomKeySet>
