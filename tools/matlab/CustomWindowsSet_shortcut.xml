@@ -76,6 +76,10 @@
          <Stroke alt="on" code="VK_T" shift="on"/>
          <Stroke code="VK_T" meta="on" shift="on"/>
       </Action>
+      <Action id="new-figure">
+         <Stroke alt="on" code="VK_N" shift="on"/>
+         <Stroke code="VK_N" meta="on" shift="on"/>
+      </Action>
    </Context>
    <Context id="CommandWindow">
       <Action id="kill-line"/>
