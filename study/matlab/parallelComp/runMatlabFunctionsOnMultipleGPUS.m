@@ -6,7 +6,7 @@ X = rand(1, N, 'gpuArray');
 numIterations = 1000;
 
 %%
-parpool(gpuDeviceCount);
+parpool(2);
 % delete(gcp('nocreate'));
 
 %%
