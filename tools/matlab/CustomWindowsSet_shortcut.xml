@@ -9,6 +9,10 @@
          <Stroke alt="on" code="VK_F" shift="on"/>
          <Stroke code="VK_F" meta="on" shift="on"/>
       </Action>
+      <Action id="prev-cell">
+         <Stroke alt="on" code="VK_PAGE_UP"/>
+         <Stroke code="VK_PAGE_UP" meta="on"/>
+      </Action>
       <Action id="select-next-tab">
          <Stroke code="VK_PAGE_DOWN" ctrl="on"/>
          <Stroke code="VK_TAB" ctrl="on"/>
@@ -40,8 +44,8 @@
       </Action>
       <Action id="clear-all-breakpoints">
          <Stroke alt="on" code="VK_C" shift="on"/>
-         <Stroke code="VK_F12" shift="on"/>
          <Stroke code="VK_C" meta="on" shift="on"/>
+         <Stroke code="VK_F12" shift="on"/>
       </Action>
       <Action id="exit-debug">
          <Stroke code="VK_F8" shift="on"/>
@@ -61,6 +65,10 @@
       <Action id="clear-command-window">
          <Stroke alt="on" code="VK_W" shift="on"/>
          <Stroke code="VK_W" meta="on" shift="on"/>
+      </Action>
+      <Action id="next-cell">
+         <Stroke alt="on" code="VK_PAGE_DOWN"/>
+         <Stroke code="VK_PAGE_DOWN" meta="on"/>
       </Action>
       <Action id="uncomment">
          <Stroke code="VK_T" ctrl="on"/>
