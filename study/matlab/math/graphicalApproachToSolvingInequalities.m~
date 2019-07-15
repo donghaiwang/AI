@@ -1,9 +1,0 @@
-x = 0 : 0.16 : 5;
-y = 0 : 0.16 : 5;
-[xx, yy] = meshgrid(x, y);
-
-zz = xx.^yy - yy.^xx;
-h = surf(x, y, zz);
-h.EdgeColor = [0.7 0.7 0.7];
-view(20, 50);
-title('$z = x^y-y^x$', '

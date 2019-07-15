@@ -1,28 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CustomKeySet derivedfrom="Windows" modifieddefault="false">
    <Context id="Global">
-      <Action id="select-previous-tab">
-         <Stroke code="VK_PAGE_UP" ctrl="on"/>
-         <Stroke code="VK_TAB" ctrl="on" shift="on"/>
-      </Action>
       <Action id="change-current-folder">
          <Stroke alt="on" code="VK_F" shift="on"/>
          <Stroke code="VK_F" meta="on" shift="on"/>
-      </Action>
-      <Action id="prev-cell">
-         <Stroke alt="on" code="VK_PAGE_UP"/>
-         <Stroke code="VK_PAGE_UP" meta="on"/>
-      </Action>
-      <Action id="select-next-tab">
-         <Stroke code="VK_PAGE_DOWN" ctrl="on"/>
-         <Stroke code="VK_TAB" ctrl="on"/>
-      </Action>
-      <Action id="split-screen-left-right">
-         <Stroke alt="on" code="VK_S" shift="on"/>
-         <Stroke code="VK_S" meta="on" shift="on"/>
-      </Action>
-      <Action id="publish-to-default-format">
-         <Stroke code="VK_P" ctrl="on" shift="on"/>
       </Action>
       <Action id="goto-line">
          <Stroke code="VK_L" ctrl="on"/>
@@ -47,6 +28,41 @@
          <Stroke code="VK_C" meta="on" shift="on"/>
          <Stroke code="VK_F12" shift="on"/>
       </Action>
+      <Action id="toggle-bookmark">
+         <Stroke code="VK_F2" ctrl="on"/>
+         <Stroke code="VK_F2" shift="on"/>
+      </Action>
+      <Action id="clear-command-window">
+         <Stroke alt="on" code="VK_W" shift="on"/>
+         <Stroke code="VK_W" meta="on" shift="on"/>
+      </Action>
+      <Action id="prev-bookmark">
+         <Stroke alt="on" code="VK_F2" shift="on"/>
+         <Stroke code="VK_F2" meta="on" shift="on"/>
+      </Action>
+      <Action id="new-figure">
+         <Stroke alt="on" code="VK_N" shift="on"/>
+         <Stroke code="VK_N" meta="on" shift="on"/>
+      </Action>
+      <Action id="select-previous-tab">
+         <Stroke code="VK_PAGE_UP" ctrl="on"/>
+         <Stroke code="VK_TAB" ctrl="on" shift="on"/>
+      </Action>
+      <Action id="prev-cell">
+         <Stroke alt="on" code="VK_PAGE_UP"/>
+         <Stroke code="VK_PAGE_UP" meta="on"/>
+      </Action>
+      <Action id="select-next-tab">
+         <Stroke code="VK_PAGE_DOWN" ctrl="on"/>
+         <Stroke code="VK_TAB" ctrl="on"/>
+      </Action>
+      <Action id="split-screen-left-right">
+         <Stroke alt="on" code="VK_S" shift="on"/>
+         <Stroke code="VK_S" meta="on" shift="on"/>
+      </Action>
+      <Action id="publish-to-default-format">
+         <Stroke code="VK_P" ctrl="on" shift="on"/>
+      </Action>
       <Action id="exit-debug">
          <Stroke code="VK_F8" shift="on"/>
       </Action>
@@ -61,10 +77,6 @@
       <Action id="comment">
          <Stroke code="VK_R" ctrl="on"/>
          <Stroke code="VK_SLASH" ctrl="on"/>
-      </Action>
-      <Action id="clear-command-window">
-         <Stroke alt="on" code="VK_W" shift="on"/>
-         <Stroke code="VK_W" meta="on" shift="on"/>
       </Action>
       <Action id="next-cell">
          <Stroke alt="on" code="VK_PAGE_DOWN"/>
@@ -84,10 +96,6 @@
       <Action id="set-path">
          <Stroke alt="on" code="VK_T" shift="on"/>
          <Stroke code="VK_T" meta="on" shift="on"/>
-      </Action>
-      <Action id="new-figure">
-         <Stroke alt="on" code="VK_N" shift="on"/>
-         <Stroke code="VK_N" meta="on" shift="on"/>
       </Action>
    </Context>
    <Context id="CommandWindow">
