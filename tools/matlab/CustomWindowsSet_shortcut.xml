@@ -8,6 +8,10 @@
       <Action id="goto-line">
          <Stroke code="VK_L" ctrl="on"/>
       </Action>
+      <Action id="create-cell-from-selection">
+         <Stroke alt="on" code="VK_I" shift="on"/>
+         <Stroke code="VK_I" meta="on" shift="on"/>
+      </Action>
       <Action id="go-until-cursor">
          <Stroke code="VK_F7"/>
       </Action>
