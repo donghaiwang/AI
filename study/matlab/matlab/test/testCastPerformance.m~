@@ -1,0 +1,28 @@
+
+accIdx = 1;
+for scale = 1 : 100 : 5e4
+    acc(accIdx, 1) = scale;
+    a = zeros(scale);
+    tic
+    aSingle = cast(a, 'single');
+    castTime = toc;
+    
+    acc
+    
+    tic
+    bSingle = single(a);
+    singleTime = toc;
+end
+
+%%
+num = 5e4;
+a = zeros(num);
+
+tic
+aSingle = cast(a, 'single');
+toc
+
+tic
+bSingle = single(a);
+toc
+
