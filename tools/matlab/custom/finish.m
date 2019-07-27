@@ -7,5 +7,5 @@
 
 %   Copyright 1984-2000 The MathWorks, Inc. 
 
-disp(getString(message('MATLAB:finishsav:SavingWorkspaceData')));
-save 
+% disp(getString(message('MATLAB:finishsav:SavingWorkspaceData')));
+% save 

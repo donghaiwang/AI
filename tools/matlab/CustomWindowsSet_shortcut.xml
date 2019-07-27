@@ -1,31 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CustomKeySet derivedfrom="Windows" modifieddefault="false">
    <Context id="Global">
-      <Action id="select-previous-tab">
-         <Stroke code="VK_PAGE_UP" ctrl="on"/>
-         <Stroke code="VK_TAB" ctrl="on" shift="on"/>
-      </Action>
       <Action id="change-current-folder">
          <Stroke alt="on" code="VK_F" shift="on"/>
          <Stroke code="VK_F" meta="on" shift="on"/>
       </Action>
-      <Action id="select-next-tab">
-         <Stroke code="VK_PAGE_DOWN" ctrl="on"/>
-         <Stroke code="VK_TAB" ctrl="on"/>
-      </Action>
-      <Action id="split-screen-left-right">
-         <Stroke alt="on" code="VK_S" shift="on"/>
-         <Stroke code="VK_S" meta="on" shift="on"/>
-      </Action>
-      <Action id="publish-to-default-format">
-         <Stroke code="VK_P" ctrl="on" shift="on"/>
-      </Action>
       <Action id="goto-line">
          <Stroke code="VK_L" ctrl="on"/>
       </Action>
+      <Action id="create-cell-from-selection">
+         <Stroke alt="on" code="VK_I" shift="on"/>
+         <Stroke code="VK_I" meta="on" shift="on"/>
+      </Action>
       <Action id="go-until-cursor">
-         <Stroke alt="on" code="VK_R" shift="on"/>
-         <Stroke code="VK_R" meta="on" shift="on"/>
+         <Stroke code="VK_F7"/>
       </Action>
       <Action id="show-preferences">
          <Stroke alt="on" code="VK_P" shift="on"/>
@@ -42,6 +30,45 @@
       <Action id="clear-all-breakpoints">
          <Stroke alt="on" code="VK_C" shift="on"/>
          <Stroke code="VK_C" meta="on" shift="on"/>
+         <Stroke code="VK_F12" shift="on"/>
+      </Action>
+      <Action id="toggle-bookmark">
+         <Stroke code="VK_F2" ctrl="on"/>
+         <Stroke code="VK_F2" shift="on"/>
+      </Action>
+      <Action id="clear-command-window">
+         <Stroke alt="on" code="VK_W" shift="on"/>
+         <Stroke code="VK_W" meta="on" shift="on"/>
+      </Action>
+      <Action id="prev-bookmark">
+         <Stroke alt="on" code="VK_F2" shift="on"/>
+         <Stroke code="VK_F2" meta="on" shift="on"/>
+      </Action>
+      <Action id="new-figure">
+         <Stroke alt="on" code="VK_N" shift="on"/>
+         <Stroke code="VK_N" meta="on" shift="on"/>
+      </Action>
+      <Action id="select-previous-tab">
+         <Stroke code="VK_PAGE_UP" ctrl="on"/>
+         <Stroke code="VK_TAB" ctrl="on" shift="on"/>
+      </Action>
+      <Action id="prev-cell">
+         <Stroke alt="on" code="VK_PAGE_UP"/>
+         <Stroke code="VK_PAGE_UP" meta="on"/>
+      </Action>
+      <Action id="select-next-tab">
+         <Stroke code="VK_PAGE_DOWN" ctrl="on"/>
+         <Stroke code="VK_TAB" ctrl="on"/>
+      </Action>
+      <Action id="split-screen-left-right">
+         <Stroke alt="on" code="VK_S" shift="on"/>
+         <Stroke code="VK_S" meta="on" shift="on"/>
+      </Action>
+      <Action id="publish-to-default-format">
+         <Stroke code="VK_P" ctrl="on" shift="on"/>
+      </Action>
+      <Action id="exit-debug">
+         <Stroke code="VK_F8" shift="on"/>
       </Action>
       <Action id="open-with-system-browser">
          <Stroke alt="on" code="VK_E" shift="on"/>
@@ -55,13 +82,17 @@
          <Stroke code="VK_R" ctrl="on"/>
          <Stroke code="VK_SLASH" ctrl="on"/>
       </Action>
-      <Action id="clear-command-window">
-         <Stroke alt="on" code="VK_W" shift="on"/>
-         <Stroke code="VK_W" meta="on" shift="on"/>
+      <Action id="next-cell">
+         <Stroke alt="on" code="VK_PAGE_DOWN"/>
+         <Stroke code="VK_PAGE_DOWN" meta="on"/>
       </Action>
       <Action id="uncomment">
          <Stroke code="VK_T" ctrl="on"/>
          <Stroke code="VK_COMMA" ctrl="on"/>
+      </Action>
+      <Action id="debug-continue">
+         <Stroke code="VK_F5"/>
+         <Stroke code="VK_F8"/>
       </Action>
       <Action id="kill-line">
          <Stroke code="VK_K" ctrl="on"/>
@@ -73,8 +104,42 @@
    </Context>
    <Context id="CommandWindow">
       <Action id="kill-line"/>
+      <Action id="open-selection">
+         <Stroke code="VK_F3"/>
+      </Action>
    </Context>
    <Context id="Explorer">
       <Action id="jump-list-prev"/>
+      <Action follows="None" id="open-selection">
+         <Stroke code="VK_ENTER"/>
+         <Stroke code="VK_D" ctrl="on"/>
+         <Stroke code="VK_F3"/>
+      </Action>
+   </Context>
+   <Context id="VariableEditor">
+      <Action id="open-selection">
+         <Stroke code="VK_F3"/>
+      </Action>
+   </Context>
+   <Context id="Project">
+      <Action id="open-selection">
+         <Stroke code="VK_ENTER"/>
+         <Stroke code="VK_F3"/>
+      </Action>
+   </Context>
+   <Context id="HTMLRenderer">
+      <Action id="open-selection">
+         <Stroke code="VK_F3"/>
+      </Action>
+   </Context>
+   <Context id="MATLABEditor">
+      <Action id="open-selection">
+         <Stroke code="VK_F3"/>
+      </Action>
+   </Context>
+   <Context id="Recordlist">
+      <Action id="open-selection">
+         <Stroke code="VK_F3"/>
+      </Action>
    </Context>
 </CustomKeySet>

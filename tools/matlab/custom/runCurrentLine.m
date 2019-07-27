@@ -18,4 +18,5 @@ contentsCell = splitlines(scriptContents);
 clc;
 eval(contentsCell{selectLineIdx});  % run the line at cursor
 
+clear activeEditor contentsCell scriptContents selectionPosition selectLineIdx
 % end
