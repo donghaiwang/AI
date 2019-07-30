@@ -5,6 +5,24 @@
          <Stroke alt="on" code="VK_F" shift="on"/>
          <Stroke code="VK_F" meta="on" shift="on"/>
       </Action>
+      <Action id="new-mfunction">
+         <Stroke alt="on" code="VK_N" shift="on"/>
+         <Stroke code="VK_N" meta="on" shift="on"/>
+      </Action>
+      <Action id="add-cell-divider">
+         <Stroke alt="on" code="VK_ENTER" shift="on"/>
+         <Stroke code="VK_ENTER" meta="on" shift="on"/>
+      </Action>
+      <Action id="split-screen-off">
+         <Stroke code="VK_F6" shift="on"/>
+      </Action>
+      <Action id="find-files">
+         <Stroke alt="on" code="VK_F" ctrl="on" shift="on"/>
+         <Stroke code="VK_F" ctrl="on" meta="on" shift="on"/>
+      </Action>
+      <Action id="enable-disable-breakpoint">
+         <Stroke code="VK_F12" ctrl="on"/>
+      </Action>
       <Action id="goto-line">
          <Stroke code="VK_L" ctrl="on"/>
       </Action>
@@ -28,14 +46,13 @@
          <Stroke code="VK_K" meta="on" shift="on"/>
       </Action>
       <Action id="clear-all-breakpoints">
-         <Stroke alt="on" code="VK_C" shift="on"/>
-         <Stroke code="VK_C" meta="on" shift="on"/>
          <Stroke code="VK_F12" shift="on"/>
       </Action>
       <Action id="toggle-bookmark">
          <Stroke code="VK_F2" ctrl="on"/>
          <Stroke code="VK_F2" shift="on"/>
       </Action>
+      <Action id="inc-search-forward"/>
       <Action id="clear-command-window">
          <Stroke alt="on" code="VK_W" shift="on"/>
          <Stroke code="VK_W" meta="on" shift="on"/>
@@ -44,9 +61,12 @@
          <Stroke alt="on" code="VK_F2" shift="on"/>
          <Stroke code="VK_F2" meta="on" shift="on"/>
       </Action>
-      <Action id="new-figure">
-         <Stroke alt="on" code="VK_N" shift="on"/>
-         <Stroke code="VK_N" meta="on" shift="on"/>
+      <Action id="save-as">
+         <Stroke code="VK_S" ctrl="on" shift="on"/>
+      </Action>
+      <Action id="set-modify-breakpoint-condition">
+         <Stroke alt="on" code="VK_F12"/>
+         <Stroke code="VK_F12" meta="on"/>
       </Action>
       <Action id="select-previous-tab">
          <Stroke code="VK_PAGE_UP" ctrl="on"/>
@@ -64,8 +84,24 @@
          <Stroke alt="on" code="VK_S" shift="on"/>
          <Stroke code="VK_S" meta="on" shift="on"/>
       </Action>
+      <Action id="adjust-window-top">
+         <Stroke alt="on" code="VK_U" ctrl="on"/>
+         <Stroke code="VK_U" ctrl="on" meta="on"/>
+      </Action>
       <Action id="publish-to-default-format">
          <Stroke code="VK_P" ctrl="on" shift="on"/>
+      </Action>
+      <Action id="to-upper-case">
+         <Stroke alt="on" code="VK_U" shift="on"/>
+         <Stroke code="VK_U" meta="on" shift="on"/>
+      </Action>
+      <Action id="clear-command-history">
+         <Stroke alt="on" code="VK_H" shift="on"/>
+         <Stroke code="VK_H" meta="on" shift="on"/>
+      </Action>
+      <Action id="adjust-window-bottom">
+         <Stroke alt="on" code="VK_B" ctrl="on"/>
+         <Stroke code="VK_B" ctrl="on" meta="on"/>
       </Action>
       <Action id="exit-debug">
          <Stroke code="VK_F8" shift="on"/>
@@ -82,9 +118,15 @@
          <Stroke code="VK_R" ctrl="on"/>
          <Stroke code="VK_SLASH" ctrl="on"/>
       </Action>
+      <Action id="collapse">
+         <Stroke code="VK_COMMA" ctrl="on" shift="on"/>
+      </Action>
       <Action id="next-cell">
          <Stroke alt="on" code="VK_PAGE_DOWN"/>
          <Stroke code="VK_PAGE_DOWN" meta="on"/>
+      </Action>
+      <Action id="new-mclass">
+         <Stroke code="VK_N" ctrl="on" shift="on"/>
       </Action>
       <Action id="uncomment">
          <Stroke code="VK_T" ctrl="on"/>
@@ -93,6 +135,10 @@
       <Action id="debug-continue">
          <Stroke code="VK_F5"/>
          <Stroke code="VK_F8"/>
+      </Action>
+      <Action id="diff-against-autosave">
+         <Stroke alt="on" code="VK_C" shift="on"/>
+         <Stroke code="VK_C" meta="on" shift="on"/>
       </Action>
       <Action id="kill-line">
          <Stroke code="VK_K" ctrl="on"/>
@@ -110,6 +156,7 @@
    </Context>
    <Context id="Explorer">
       <Action id="jump-list-prev"/>
+      <Action id="find-files"/>
       <Action follows="None" id="open-selection">
          <Stroke code="VK_ENTER"/>
          <Stroke code="VK_D" ctrl="on"/>
