@@ -128,6 +128,10 @@
       <Action id="new-mclass">
          <Stroke code="VK_N" ctrl="on" shift="on"/>
       </Action>
+      <Action id="create-shortcut-from-selection">
+         <Stroke alt="on" code="VK_V" shift="on"/>
+         <Stroke code="VK_V" meta="on" shift="on"/>
+      </Action>
       <Action id="uncomment">
          <Stroke code="VK_T" ctrl="on"/>
          <Stroke code="VK_COMMA" ctrl="on"/>
