@@ -31,7 +31,7 @@
          <Stroke code="VK_I" meta="on" shift="on"/>
       </Action>
       <Action id="go-until-cursor">
-         <Stroke code="VK_F7"/>
+         <Stroke code="VK_F8"/>
       </Action>
       <Action id="show-preferences">
          <Stroke alt="on" code="VK_P" shift="on"/>
@@ -104,8 +104,8 @@
          <Stroke code="VK_B" ctrl="on" meta="on"/>
       </Action>
       <Action id="exit-debug">
-         <Stroke code="VK_F8" shift="on"/>
          <Stroke code="VK_F5" shift="on"/>
+         <Stroke code="VK_F7" shift="on"/>
       </Action>
       <Action id="open-with-system-browser">
          <Stroke alt="on" code="VK_E" shift="on"/>
@@ -136,10 +136,6 @@
       <Action id="uncomment">
          <Stroke code="VK_T" ctrl="on"/>
          <Stroke code="VK_COMMA" ctrl="on"/>
-      </Action>
-      <Action id="debug-continue">
-         <Stroke code="VK_F5"/>
-         <Stroke code="VK_F8"/>
       </Action>
       <Action id="diff-against-autosave">
          <Stroke alt="on" code="VK_C" shift="on"/>
