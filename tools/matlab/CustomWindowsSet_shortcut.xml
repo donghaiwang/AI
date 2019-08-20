@@ -9,6 +9,9 @@
          <Stroke alt="on" code="VK_N" shift="on"/>
          <Stroke code="VK_N" meta="on" shift="on"/>
       </Action>
+      <Action id="import-data">
+         <Stroke code="VK_O" ctrl="on" shift="on"/>
+      </Action>
       <Action id="add-cell-divider">
          <Stroke alt="on" code="VK_ENTER" shift="on"/>
          <Stroke code="VK_ENTER" meta="on" shift="on"/>
