@@ -118,6 +118,7 @@
       <Action id="exit-debug">
          <Stroke code="VK_F5" shift="on"/>
          <Stroke code="VK_F7" shift="on"/>
+         <Stroke code="VK_F4"/>
       </Action>
       <Action id="open-with-system-browser">
          <Stroke alt="on" code="VK_E" shift="on"/>
