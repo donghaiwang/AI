@@ -5,12 +5,12 @@
          <Stroke alt="on" code="VK_F" shift="on"/>
          <Stroke code="VK_F" meta="on" shift="on"/>
       </Action>
-      <Action id="new-mfunction">
-         <Stroke alt="on" code="VK_N" shift="on"/>
-         <Stroke code="VK_N" meta="on" shift="on"/>
-      </Action>
       <Action id="import-data">
          <Stroke code="VK_O" ctrl="on" shift="on"/>
+      </Action>
+      <Action id="new-app">
+         <Stroke alt="on" code="VK_A" shift="on"/>
+         <Stroke code="VK_A" meta="on" shift="on"/>
       </Action>
       <Action id="add-cell-divider">
          <Stroke alt="on" code="VK_ENTER" shift="on"/>
@@ -19,9 +19,9 @@
       <Action id="split-screen-off">
          <Stroke code="VK_F6" shift="on"/>
       </Action>
-      <Action id="find-files">
-         <Stroke alt="on" code="VK_F" ctrl="on" shift="on"/>
-         <Stroke code="VK_F" ctrl="on" meta="on" shift="on"/>
+      <Action id="duplicate-record">
+         <Stroke alt="on" code="VK_D" shift="on"/>
+         <Stroke code="VK_D" meta="on" shift="on"/>
       </Action>
       <Action id="enable-disable-breakpoint">
          <Stroke alt="on" code="VK_F12" shift="on"/>
@@ -30,23 +30,106 @@
       <Action id="goto-line">
          <Stroke code="VK_L" ctrl="on"/>
       </Action>
-      <Action id="create-cell-from-selection">
-         <Stroke alt="on" code="VK_I" shift="on"/>
-         <Stroke code="VK_I" meta="on" shift="on"/>
-      </Action>
       <Action id="go-until-cursor">
          <Stroke code="VK_F7"/>
+      </Action>
+      <Action id="close-genome-desktop">
+         <Stroke code="VK_W" ctrl="on"/>
       </Action>
       <Action id="show-preferences">
          <Stroke alt="on" code="VK_P" shift="on"/>
          <Stroke code="VK_P" meta="on" shift="on"/>
       </Action>
-      <Action id="mlint-fix-action">
-         <Stroke code="VK_BACK_QUOTE" ctrl="on"/>
-      </Action>
       <Action id="beep">
          <Stroke alt="on" code="VK_B" shift="on"/>
          <Stroke code="VK_B" meta="on" shift="on"/>
+      </Action>
+      <Action id="clear-command-window">
+         <Stroke alt="on" code="VK_W" shift="on"/>
+         <Stroke code="VK_W" meta="on" shift="on"/>
+      </Action>
+      <Action id="eval-cell">
+         <Stroke code="VK_ENTER" ctrl="on"/>
+         <Stroke alt="on" code="VK_ENTER"/>
+         <Stroke code="VK_ENTER" meta="on"/>
+      </Action>
+      <Action id="caret-begin">
+         <Stroke alt="on" code="VK_LEFT" shift="on"/>
+         <Stroke code="VK_LEFT" meta="on" shift="on"/>
+         <Stroke alt="on" code="VK_KP_LEFT" shift="on"/>
+         <Stroke code="VK_KP_LEFT" meta="on" shift="on"/>
+      </Action>
+      <Action id="prev-bookmark">
+         <Stroke alt="on" code="VK_F2" shift="on"/>
+         <Stroke code="VK_F2" meta="on" shift="on"/>
+      </Action>
+      <Action id="set-modify-breakpoint-condition">
+         <Stroke alt="on" code="VK_F12"/>
+         <Stroke code="VK_F12" meta="on"/>
+      </Action>
+      <Action id="prev-cell">
+         <Stroke alt="on" code="VK_PAGE_UP"/>
+         <Stroke code="VK_PAGE_UP" meta="on"/>
+      </Action>
+      <Action id="split-screen-left-right">
+         <Stroke alt="on" code="VK_S" shift="on"/>
+         <Stroke code="VK_S" meta="on" shift="on"/>
+      </Action>
+      <Action id="publish-to-default-format">
+         <Stroke code="VK_P" ctrl="on" shift="on"/>
+      </Action>
+      <Action id="to-upper-case">
+         <Stroke alt="on" code="VK_U" shift="on"/>
+         <Stroke code="VK_U" meta="on" shift="on"/>
+      </Action>
+      <Action id="caret-end">
+         <Stroke alt="on" code="VK_RIGHT" shift="on"/>
+         <Stroke code="VK_RIGHT" meta="on" shift="on"/>
+         <Stroke alt="on" code="VK_KP_RIGHT" shift="on"/>
+         <Stroke code="VK_KP_RIGHT" meta="on" shift="on"/>
+      </Action>
+      <Action id="adjust-window-bottom">
+         <Stroke alt="on" code="VK_B" ctrl="on"/>
+         <Stroke code="VK_B" ctrl="on" meta="on"/>
+      </Action>
+      <Action id="open-with-system-browser">
+         <Stroke alt="on" code="VK_E" shift="on"/>
+         <Stroke code="VK_E" meta="on" shift="on"/>
+      </Action>
+      <Action id="next-cell">
+         <Stroke alt="on" code="VK_PAGE_DOWN"/>
+         <Stroke code="VK_PAGE_DOWN" meta="on"/>
+      </Action>
+      <Action id="new-mclass">
+         <Stroke code="VK_N" ctrl="on" shift="on"/>
+      </Action>
+      <Action id="create-shortcut-from-selection">
+         <Stroke alt="on" code="VK_V" shift="on"/>
+         <Stroke code="VK_V" meta="on" shift="on"/>
+      </Action>
+      <Action id="uncomment">
+         <Stroke code="VK_T" ctrl="on"/>
+         <Stroke alt="on" code="VK_SLASH" shift="on"/>
+         <Stroke code="VK_SLASH" meta="on" shift="on"/>
+      </Action>
+      <Action id="set-path">
+         <Stroke alt="on" code="VK_T" shift="on"/>
+         <Stroke code="VK_T" meta="on" shift="on"/>
+      </Action>
+      <Action id="new-mfunction">
+         <Stroke alt="on" code="VK_N" shift="on"/>
+         <Stroke code="VK_N" meta="on" shift="on"/>
+      </Action>
+      <Action id="find-files">
+         <Stroke alt="on" code="VK_F" ctrl="on" shift="on"/>
+         <Stroke code="VK_F" ctrl="on" meta="on" shift="on"/>
+      </Action>
+      <Action id="create-cell-from-selection">
+         <Stroke alt="on" code="VK_I" shift="on"/>
+         <Stroke code="VK_I" meta="on" shift="on"/>
+      </Action>
+      <Action id="mlint-fix-action">
+         <Stroke code="VK_BACK_QUOTE" ctrl="on"/>
       </Action>
       <Action id="clear-workspace">
          <Stroke alt="on" code="VK_K" shift="on"/>
@@ -60,69 +143,41 @@
          <Stroke code="VK_F2" shift="on"/>
       </Action>
       <Action id="inc-search-forward"/>
-      <Action id="clear-command-window">
-         <Stroke alt="on" code="VK_W" shift="on"/>
-         <Stroke code="VK_W" meta="on" shift="on"/>
-      </Action>
-      <Action id="eval-cell">
-         <Stroke code="VK_ENTER" ctrl="on"/>
-         <Stroke alt="on" code="VK_ENTER"/>
-         <Stroke code="VK_ENTER" meta="on"/>
-      </Action>
-      <Action id="prev-bookmark">
-         <Stroke alt="on" code="VK_F2" shift="on"/>
-         <Stroke code="VK_F2" meta="on" shift="on"/>
-      </Action>
       <Action id="save-as">
          <Stroke code="VK_S" ctrl="on" shift="on"/>
       </Action>
-      <Action id="set-modify-breakpoint-condition">
-         <Stroke alt="on" code="VK_F12"/>
-         <Stroke code="VK_F12" meta="on"/>
+      <Action id="copy-full-path">
+         <Stroke alt="on" code="VK_C" shift="on"/>
+         <Stroke code="VK_C" meta="on" shift="on"/>
+      </Action>
+      <Action id="launch-profiler">
+         <Stroke alt="on" code="VK_P" ctrl="on"/>
+         <Stroke code="VK_P" ctrl="on" meta="on"/>
       </Action>
       <Action id="select-previous-tab">
          <Stroke code="VK_PAGE_UP" ctrl="on"/>
          <Stroke code="VK_TAB" ctrl="on" shift="on"/>
       </Action>
-      <Action id="prev-cell">
-         <Stroke alt="on" code="VK_PAGE_UP"/>
-         <Stroke code="VK_PAGE_UP" meta="on"/>
-      </Action>
       <Action id="select-next-tab">
          <Stroke code="VK_PAGE_DOWN" ctrl="on"/>
          <Stroke code="VK_TAB" ctrl="on"/>
       </Action>
-      <Action id="split-screen-left-right">
-         <Stroke alt="on" code="VK_S" shift="on"/>
-         <Stroke code="VK_S" meta="on" shift="on"/>
+      <Action id="select-next-client">
+         <Stroke alt="on" code="VK_BACK_QUOTE"/>
+         <Stroke code="VK_BACK_QUOTE" meta="on"/>
       </Action>
       <Action id="adjust-window-top">
          <Stroke alt="on" code="VK_U" ctrl="on"/>
          <Stroke code="VK_U" ctrl="on" meta="on"/>
       </Action>
-      <Action id="publish-to-default-format">
-         <Stroke code="VK_P" ctrl="on" shift="on"/>
-      </Action>
-      <Action id="to-upper-case">
-         <Stroke alt="on" code="VK_U" shift="on"/>
-         <Stroke code="VK_U" meta="on" shift="on"/>
-      </Action>
       <Action id="clear-command-history">
          <Stroke alt="on" code="VK_H" shift="on"/>
          <Stroke code="VK_H" meta="on" shift="on"/>
-      </Action>
-      <Action id="adjust-window-bottom">
-         <Stroke alt="on" code="VK_B" ctrl="on"/>
-         <Stroke code="VK_B" ctrl="on" meta="on"/>
       </Action>
       <Action id="exit-debug">
          <Stroke code="VK_F5" shift="on"/>
          <Stroke code="VK_F7" shift="on"/>
          <Stroke code="VK_F4"/>
-      </Action>
-      <Action id="open-with-system-browser">
-         <Stroke alt="on" code="VK_E" shift="on"/>
-         <Stroke code="VK_E" meta="on" shift="on"/>
       </Action>
       <Action id="to-lower-case">
          <Stroke alt="on" code="VK_L" shift="on"/>
@@ -136,26 +191,6 @@
          <Stroke alt="on" code="VK_SLASH"/>
          <Stroke code="VK_SLASH" meta="on"/>
       </Action>
-      <Action id="next-cell">
-         <Stroke alt="on" code="VK_PAGE_DOWN"/>
-         <Stroke code="VK_PAGE_DOWN" meta="on"/>
-      </Action>
-      <Action id="new-mclass">
-         <Stroke code="VK_N" ctrl="on" shift="on"/>
-      </Action>
-      <Action id="create-shortcut-from-selection">
-         <Stroke alt="on" code="VK_V" shift="on"/>
-         <Stroke code="VK_V" meta="on" shift="on"/>
-      </Action>
-      <Action id="diff-against-autosave">
-         <Stroke alt="on" code="VK_C" shift="on"/>
-         <Stroke code="VK_C" meta="on" shift="on"/>
-      </Action>
-      <Action id="uncomment">
-         <Stroke code="VK_T" ctrl="on"/>
-         <Stroke alt="on" code="VK_SLASH" shift="on"/>
-         <Stroke code="VK_SLASH" meta="on" shift="on"/>
-      </Action>
       <Action id="debug-continue">
          <Stroke code="VK_F5"/>
          <Stroke code="VK_F8"/>
@@ -163,9 +198,9 @@
       <Action id="kill-line">
          <Stroke code="VK_K" ctrl="on"/>
       </Action>
-      <Action id="set-path">
-         <Stroke alt="on" code="VK_T" shift="on"/>
-         <Stroke code="VK_T" meta="on" shift="on"/>
+      <Action id="show-demos">
+         <Stroke alt="on" code="VK_X" shift="on"/>
+         <Stroke code="VK_X" meta="on" shift="on"/>
       </Action>
    </Context>
    <Context id="CommandWindow">

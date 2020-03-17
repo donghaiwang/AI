@@ -25,13 +25,13 @@ addpath(currentPath);
 
 
 %% System Boot
-status = system('C:\Program Files (x86)\EndNote X8\EndNote.exe &');
-system('C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.1\bin\pycharm64.exe &');
-system('D:\software\MobaXterm Personal Edition\MobaXterm.exe &');
+% status = system('C:\Program Files (x86)\EndNote X8\EndNote.exe &');
+% system('C:\Program Files\JetBrains\PyCharm Community Edition 2019.3.1\bin\pycharm64.exe &');
+% system('D:\software\MobaXterm Personal Edition\MobaXterm.exe &');
 
-system('C:\Program Files (x86)\Google\Chrome\Application\chrome.exe &');
-system('C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\Acrobat.exe &');
-system('C:\Program Files\Microsoft Office\Office16\WINWORD.EXE& ');
+% system('C:\Program Files (x86)\Google\Chrome\Application\chrome.exe &');
+% system('C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\Acrobat.exe &');
+% system('C:\Program Files\Microsoft Office\Office16\WINWORD.EXE& ');
 
 % Select free GPU device if have GPU
 
