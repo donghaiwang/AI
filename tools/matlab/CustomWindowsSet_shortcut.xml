@@ -129,7 +129,7 @@
          <Stroke code="VK_I" meta="on" shift="on"/>
       </Action>
       <Action id="mlint-fix-action">
-         <Stroke code="VK_BACK_QUOTE" ctrl="on"/>
+         <Stroke code="VK_SLASH" ctrl="on"/>
       </Action>
       <Action id="clear-workspace">
          <Stroke alt="on" code="VK_K" shift="on"/>
