@@ -1,0 +1,1 @@
+/home/d/.bashrc
