@@ -281,7 +281,8 @@ alias kl='kill -s 9'
 alias dk='docker'
 alias dki='docker images'
 alias dkp='docker ps -a'
-alias ref='source ~/.bashrc'
+# reload environment variable change and return to previous directory
+alias ref='source ~/.bashrc; cd -'
 #alias kpy='ps aux | grep pycharm | awk '{print $2}' | xargs kill -s 9'
 
 #alias klmat="ps aux | grep MATLAB | grep d | grep -v color | awk '{print $2}' | xargs kill -s 9"
@@ -294,6 +295,7 @@ alias vb='vi ~/.bashrc'
 
 # git 
 alias gts='git status'
+alias gd='git diff'
 
 # kill limitcpu
 # ps aux | grep cputool | awk '{print $2}' | xargs kill -s 9
