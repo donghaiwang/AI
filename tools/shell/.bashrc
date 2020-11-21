@@ -16,7 +16,9 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+# 设置历史命令最大能存储的条数
 HISTSIZE=1000
+# 设置历史命令存储文件的最大尺寸
 HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
@@ -91,6 +93,12 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+# 按照文件扩展名展示
+# alias lx='ls -lXB'
+# 按照文件大小排序展示
+# alias lk='ls -lSr'
+# 按照时间排序展示
+# alias lt='ls -ltr'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -198,7 +206,7 @@ export PATH=$PATH:/home/d/software/gambit/bin/
 # <<< conda init <<<
 
 alias python='/home/d/anaconda2/envs/deepmot/bin/python'
-source /opt/ros/melodic/setup.bash
+# source /opt/ros/melodic/setup.bash
 
 export GUROBI_HOME=/home/d/software/gurobi811/linux64
 export PATH=${PATH}:${GUROBI_HOME}/bin
@@ -214,7 +222,6 @@ cd_ll()
   \cd $1
   ll
 }
-alias cd='cd_ll'
 
 cb() {
     local _scs_col="\e[0;32m"; local _wrn_col='\e[1;31m'; local _trn_col='\e[0;33m'
@@ -247,7 +254,15 @@ cb() {
     fi
     input=""
 }
+
+#------------------------------------------------------------------------------
+# 设置别名，让命令执行更便捷
+# 这一部分最好放在最后，主要是因为前面的脚本可能会用到下面的命令
+alias cd='cd_ll'
 alias pwd="pwd | cb"
+
+# readlink命令，用于读取一个文件的绝对路径，复制文件的时候经常用到
+alias rl='readlink -f'
 
 # command output -> system clipboard
 alias x="xclip -selection c"
