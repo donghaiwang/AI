@@ -1,6 +1,6 @@
 #!/bin/sh
 # /etc/init.d/cpulimit
-# Script to start CPU limit daemon
+# 启动CPU限制后台进程的脚本。Script to start CPU limit daemon
 #
 set -e
 
