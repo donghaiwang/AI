@@ -5,7 +5,7 @@
 # ==============================================================
 
 # Variables
-CPU_LIMIT=75            # Maximum percentage CPU consumption by each PID
+CPU_LIMIT=300            # Maximum percentage CPU consumption by each PID
 DAEMON_INTERVAL=3       # Daemon check interval in seconds
 BLACK_PROCESSES_LIST=   # 仅仅限制此黑名单中的进程 Limit only processes defined in this variable. If variable is empty (default) all violating processes are limited.
 WHITE_PROCESSES_LIST=   # 白名单的进程除外。 Limit all processes except processes defined in this variable. If variable is empty (default) all violating processes are limited.
