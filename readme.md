@@ -1,14 +1,14 @@
 # 人工智能
 
-研究领域包括计算机视觉、深度学习、强化学习、自动驾驶。
+研究领域包括计算机视觉、生物视觉、自动驾驶的工具。
 
 ## 入门
 
-深度强化学习的研究。
+深度学习、深度强化学习，具体子问题包括视觉目标跟踪和平稳跟踪的相关性、多目标跟踪等。
 
 ### 环境
 
-开发测试平台Windows 10、Ubuntu 14.04
+开发测试平台Ubuntu 18.04、Windows 10。
 
 ```
 Matlab 2018a
@@ -22,7 +22,7 @@ Python 3.6
 Matlab 2018a  
 
 ```
-Matlab 2018a（包括Windows、Linux、Mac平台的安装包及破解步骤）
+Matlab 2018a（包括Windows、Linux、Mac平台的安装包及安装步骤）
 ```
 
 Python
@@ -51,7 +51,7 @@ git clone https://github.com/donghaiwang/AI.git
 
 ## 测试
 
-（待添加）
+实现训练、测试、latex编译自动化。
 
 ### 分解为自动化测试
 
