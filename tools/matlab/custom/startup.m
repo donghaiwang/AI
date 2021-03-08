@@ -13,7 +13,7 @@ clear aiPath workPath
 % savepath
 
 %%
-% dbstop if error
+dbstop if error
 if ispc
     tmp = 'D:/tmp';
 else
@@ -24,6 +24,11 @@ currentPath = fileparts(mfilename('fullpath'));
 addpath(currentPath);
 
 cdtmp();
+%% Path
+addpath('/data2/whd/workspace/sot/hart/utils');
+addpath('/data2/whd/workspace/sot/hart/utils/spm12');
+addpath('/data2/whd/workspace/sot/hart/utils/xjview');
+
 
 %% System Boot
 % status = system('C:\Program Files (x86)\EndNote X8\EndNote.exe &');
