@@ -1,29 +1,36 @@
 % run this command when matlab startup
 
 %% Environment variables
-aiPath = fullfile('D:', 'workspace', 'AI');
-workPath = fullfile(aiPath, 'study', 'matlab', 'matlab');
-eval(['cd ', workPath]);
-clear aiPath workPath
-
 
 %% Require add this path to PATH
 % customPath = 'D:\workspace\AI\tools\matlab\custom';
 % addpath(customPath, '-end');
 % savepath
 
-%%
 dbstop if error
 if ispc
     tmp = 'D:/tmp';
+    workspace_dir = fullfile('D:', 'workspace');
 else
     tmp = '/tmp';
+    workspace_dir = '/data2/whd/workspace';
 end
+ai_dir = fullfile(workspace_dir, 'AI');
 
-currentPath = fileparts(mfilename('fullpath'));
-addpath(currentPath);
+% workPath = fullfile(ai_dir, 'study', 'matlab', 'matlab');
+% eval(['cd ', workPath]);
+% clear ai_dir workPath
 
-cdtmp();
+% 启动matlab时，默认进入进入当前工程的主目录（hart）
+cur_workspace_dir = fullfile(workspace_dir, 'sot', 'hart');
+eval(['cd ', cur_workspace_dir]);
+clear cur_workspace_dir
+
+custom_dir = fileparts(mfilename('fullpath'));
+addpath(custom_dir);
+
+% cdtmp();
+
 %% Path
 addpath('/data2/whd/workspace/sot/hart/utils');
 addpath('/data2/whd/workspace/sot/hart/utils/spm12');
