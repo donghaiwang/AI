@@ -13,7 +13,7 @@ clear aiPath workPath
 % savepath
 
 %%
-dbstop if error
+% dbstop if error
 if ispc
     tmp = 'D:/tmp';
 else
@@ -23,6 +23,7 @@ end
 currentPath = fileparts(mfilename('fullpath'));
 addpath(currentPath);
 
+cdtmp();
 
 %% System Boot
 % status = system('C:\Program Files (x86)\EndNote X8\EndNote.exe &');
